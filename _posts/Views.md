@@ -7,6 +7,7 @@ categories:
 - iOS 开发
 - 翻译
 id: "iOS-Note-View-Programming-Guide-for-iOS-Views"
+
 ---
 
 记录关于学习过的 iOS 文档
@@ -20,84 +21,86 @@ id: "iOS-Note-View-Programming-Guide-for-iOS-Views"
 ---
 
 #视图
-因为视图对象是应用程序与用户交互的主要方式，它负责很多职责。下面仅是少数方面：
+因为视图对象是应用程序与用户交互的主要方式，它有很多职责。这里仅是很小方面：
 
 - 布局和子视图管理
-	- 视图定义了相对于它的父视图的默认缩放行为。
-	- 视图可以管理子视图的列表。
-	- 视图可以重写子视图的尺寸和位置。
-	- 视图可以把自己坐标系统的点转换成其他视图或窗口的坐标系统的点。
-- 绘制和动画效果
-	- 视图可以在它的矩形区域绘制内容。
-	- 一些视图属性可以设置新的动画值。
-- 事件处理
-	- 视图可以接收触摸事件。
-	- 视图参与到响应链中。
+    - 视图定义了相对于父视图的自身默认缩放行为。
+    - 视图可以管理子视图的列表。
+    - 视图可以重写子视图的尺寸和位置。
+    - 视图可以把在它的坐标系统的点转换成其他视图或窗口的坐标系统的点。
+- 绘制过程和动画效果
+    - 视图在它的矩形区域内绘制内容。
+    - 一些视图属性可以被动画成新的值。
+- 事件处理过程
+    - 视图可以接收触摸事件。
+    - 视图参与响应者队列。
 
-这个章节的焦点在创建，管理，和绘制视图的步骤和视图层次的管理和处理布局。关于如何处理触摸事件 (和其他事件) 的信息，见 [*Event Handling Guide for iOS*](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541)。
+这一章节的焦点在创建，管理，和绘制视图的步骤和处理布局，视图层次结构结构的管理。关于如何在视图中处理触摸事件 (和其他事件) ，见 [*Event Handling Guide for iOS*](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541)。
 
 ##创建和配置视图对象
-你可以使用编程方式活界面构造器创建独立的视图，然后组合到视图层次中使用。
+你可以使用编程方式或界面构造器创建视图作为自包含的对象，然后将它们组装到视图层次结构中使用。
 
 ###使用界面构造器创建视图对象
-最简单的创建视图的方式是使用界面构造图形化组装它们。使用了界面构造器，你可以添加视图到你的界面，布置这些视图到层次中，配置每一个视图的设置，和为你的代码连接视图相关的行为。因为界面构造器使用实时视图对象－意思是，真实的视图的实例－你在设计时看到的就是你在运行时看到的。你可以随后将这些实时对象保存在 nib file，它是保留你的对象的状态和配置的资源文件。
+最简单的创建视图的方式是使用界面构造器图形化的组装它们。在界面构造器中，你可以添加视图到你的界面，布置这些视图到层次结构，配置每一个视图的设置，和连接视图相关的行为到你的代码。因为界面构造器使用实时视图对象－意思是，视图类的真实实例－你在设计时看到的就是你在运行时看到的。你可以保存这些实时对象到 nib 文件中，它是保持对象状态和配置的资源文件。
 
-通常创建 nib file 是为了应用程序的视图控制器的其中一个存储完整的视图层次。最高级别的 nib file 通常包含代表你的视图控制器的视图的单独视图对象。(视图控制器它自己通常代表文件拥有者对象。) 最高级别的视图尺寸应该与目标设备适应并且包含所有其他将要呈现的视图。只保存你的视图控制器的视图层次的一部分是很罕见的 nib file 用法。
+通常创建 nib 文件是为了保存应用程序的其中一个视图控制器的完整视图层次结构。nib 文件的顶层通常包含一个单一视图对象代表你的视图控制器的视图。(视图控制器它自己通常代表文件的所有者对象。) 顶层的视图尺寸应该与目标设备适应并且包含所有其他将要呈现的视图。只保存视图控制器的视图层次结构的一部分是很罕见的 nib 文件用法。
 
-当使用视图控制器与 nib file 时，所有你需要做的是在初始化视图控制器与 nib file 信息。视图控制器处理相应时间的加载视图和卸载视图。如果你的 nib file 没有关联视图控制器，你可以手动使用 NSBundle 或 UINib 对象加载 nib file 内容，它会在 nib file 中使用数据重组你的视图对象。
+当使用视图控制器与 nib 文件时，你只需要为视图控制器初始化相关的 nib 文件信息。视图控制器在相应时间处理视图的加载和卸载。如果你的 nib 文件没有与视图控制器关联，你可以手动使用 [NSBundle](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSBundle_Class/index.html#//apple_ref/occ/cl/NSBundle) 或 [UINib](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UINib_Ref/index.html#//apple_ref/occ/cl/UINib) 对象加载 nib 文件内容，它会在 nib 文件中使用数据重组你的视图对象。
 
-更多关于如何使用界面构造器创建和配置你的视图的信息，见 *Interface Builder User Guide*。关于视图控制器如何加载和管理他们关联的 nib files，见 [*View Controller Programming Guide for iOS*](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457) 中的 [Creating Custom Content View Controllers](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/BasicViewControllers/BasicViewControllers.html#//apple_ref/doc/uid/TP40007457-CH101)。
+更多关于如何使用界面构造器创建和配置你的视图的信息，见 *Interface Builder User Guide*。
 
-更多关于如何从 nib file 以编程的方式加载视图的信息，见 [*Resource Programming Guide*](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/LoadingResources/Introduction/Introduction.html#//apple_ref/doc/uid/10000051i) 中的 [Nib Files](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/LoadingResources/CocoaNibs/CocoaNibs.html#//apple_ref/doc/uid/10000051i-CH4)。
+关于视图控制器如何加载和管理与他们关联的 nib files，见 [*View Controller Programming Guide for iOS*](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457) 中的 [Creating Custom Content View Controllers](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/BasicViewControllers/BasicViewControllers.html#//apple_ref/doc/uid/TP40007457-CH101)。
+
+更多关于如何以编程的方式从 nib 文件加载视图的信息，见 [*Resource Programming Guide*](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/LoadingResources/Introduction/Introduction.html#//apple_ref/doc/uid/10000051i) 中的 [Nib Files](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/LoadingResources/CocoaNibs/CocoaNibs.html#//apple_ref/doc/uid/10000051i-CH4)。
 
 ###编程方式创建视图对象
-如果你准备以编程方式创建视图，你可以使用标准的 allocation/initialization 对。默认初始化视图的方法是 [initWithFrame: ](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/initWithFrame:)，它为视图设置 (将要建立的视图) 相对父视图的初始化尺寸和位置。例如，创建一个新的通用 UIView 对象，你可以使用类似下面的代码：
+如果你打算以编程方式创建视图，你可以使用标准的 allocation/initialization 方式。视图的默认初始化方法是 [initWithFrame: ](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/initWithFrame:)，它为视图设置初始尺寸和相对于它的父视图 (将来的父视图) 的定位。例如，创建一个新的通用 UIView 对象，你可以使用类似下面的代码：
 
 ```
 CGRect  viewRect = CGRectMake(0, 0, 100, 100);
 UIView* myView = [[UIView alloc] initWithFrame:viewRect];
 ```
 
-> 注意：尽管所有视图都支持 initWithFrame: 方法，但一些首选的 initialization 方法你应该替代 initWithFrame: 方法使用。关于自定义的初始化方法的具体信息，见该类的引用文档。
+> 注意：尽管所有视图都支持 initWithFrame: 方法，但也有一些首选的初始化方法你应该代替使用。关于自定义的初始化方法的信息，见该类的引用文档。
 
-在你创建视图之后，你必须把他添加到窗口 (或窗口的其他视图中) 它才可以变为可见的。如何添加视图到你的视图层次中，见 [Adding and Removing Subviews](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW11)。
+创建视图之后，你必须把它添加到窗口 (或窗口的其他视图中) 它才能变为可见的。如何添加视图到你的视图层次结构中，见 [Adding and Removing Subviews](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW11)。
 
 ###设置视图的属性
-UIView 类声明了几个属性控制视图的外观和行为。这些属性操作了视图的尺寸和位置，视图的透明度，背景颜色，和它的渲染行为。这些属性都有相应的默认值你可以按需要更改。你也可以在界面构造器的 Inspector 窗口配置许多的这些属性。
+UIView 类有几个已声明的属性控制视图的外观和行为。这些属性操作视图的尺寸和定位，视图的透明度，背景颜色，和它的渲染行为。这些属性都有相应的默认值你可以根据需要更改。你也可以在界面构造器使用 Inspector 窗口配置许多这些属性。
 
-表 3－1 列出大多数常用的属性 (和一些方法) 和它们的使用方法。有关联的属性列在一起因此你可以见到影响视图某些方面的选项。
+表 3－1 列出大多数常用的属性 (和一些方法) 和它们的使用方法描述。互相关联的属性被列在一起因此你可以见到影响视图某些方面的选项。
 
 **表 3-1 ** 某些关键视图属性的用法
 
 Properties | Usage 
 ------------ | ------------- 
-[alpha]()，[hidden]()，[opaque]() | 这些属性影响到属性的不透明度，alpha 和 hidden 属性直接更改视图的不透明的。<br />opaque 属性告诉系统它应该如何合成你的视图。如果你的视图的内容是完全不透明的并且因此不需要在它底部显示任何其他视图的内容，那么设置这个属性为 YES。设置为 YES 之后消除不需要的合成操作从而提升性能。
-bounds,frame,center,transform | 这些属性影响视图的尺寸和位置。center 和 frame 属性代表视图相对父视图的位置。frame 也包括视图的尺寸。bounds 属性定义视图在它的坐标系统中的可见内容区域。<br/>transform 属性用复杂的方式动画或移动整个视图。例如，你可以使用 transform 旋转或伸展视图。如果当前的转换不是恒等转换，那么 frame 属性值为为定义并且会忽略该值。<br/>关于 bounds，frame，和 center 属性之间的关系，见 [The Relationship of the Frame,Bounds,and Center Propertires](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW6)。关于转换如何影响视图的信息，见 [Coordinate System Transformations](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW7)。  
-autoresizingMask，autoresizeSubviews | 这些属性影响视图和它的子视图的自动缩放行为。autoresizingMask 属性控制视图的父视图边界发生变化时视图应该如何响应。autoresizeSubviews 属性控制当前视图的所有子视图是否同时缩放。  
-contentMode,contentStretch,contentScaleFactor | 这些属性影响视图内的内容的渲染行为。contentMode 和 contentStretch 属性决定在视图的宽度或高度变更时应该如何处理它的内容。contentScaleFactor 属性只在视图需要在高分辨率屏幕下自定义绘制行为时使用。<br /> 更多关于内容模式如何影响视图的信息，见 [Content Modes](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW2)。关于内容伸展区域如何影响你的视图，见 [Stretchable Views](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW13)。关于如何处理伸缩因素，见 [*Drawing and Printing Guide for iOS*](https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010156)  中的 [Supporting High-Resolution Screens In Views](https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/SupportingHiResScreensInViews/SupportingHiResScreensInViews.html#//apple_ref/doc/uid/TP40010156-CH15)  
+[alpha](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/alpha)，[hidden](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/hidden)，[opaque](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/opaque) | 这些属性影响到视图的不透明度，alpha 和 hidden 属性直接更改视图的不透明度。<br />opaque 属性告诉系统它应该如何合成你的视图。设置这个属性为 YES 如果你的视图的内容是完全不透明的并且不需要在它底部显示任何其他视图的内容。设置为 YES 可以通过消除不需要的合成操作提升性能。
+[bounds](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/bounds),[frame](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/frame),[center](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/center),[transform](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/transform) | 这些属性影响视图的尺寸和定位。center 和 frame 属性代表视图相对于它的父视图的定位。frame 也包括视图的尺寸。bounds 属性定义视图在它自己的坐标系统中的可见内容区域。<br/>transform 属性被用作以一种复杂的方式将整个视图动画或移动。例如，你可以使用 transform 旋转或伸展视图。如果当前的转换不是恒等转换，那么 frame 属性值为未定义的并且会被忽略。<br/>关于 bounds，frame，和 center 属性之间的关系，见 [The Relationship of the Frame,Bounds,and Center Propertires](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW6)。<br/>关于转换如何影响视图，见 [Coordinate System Transformations](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW7)。  
+[autoresizingMask](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/autoresizingMask)，[autoresizeSubviews](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/autoresizesSubviews) | 这些属性影响视图和它的子视图的自动调整尺寸行为。autoresizingMask 属性控制视图应该如何响应它的父视图的边界更改。autoresizeSubviews 属性控制当前视图的子视图是否自动调整尺寸。  
+[contentMode](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/contentMode),[contentStretch](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/contentStretch),[contentScaleFactor](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/contentScaleFactor) | 这些属性影响视图内部的内容的渲染行为。contentMode 和 contentStretch 属性决定在视图的宽度或高度变更时应该如何处理内容。contentScaleFactor 属性只在视图需要在高分辨率屏幕下自定义绘制行为时使用。<br /> 更多关于内容模式如何影响视图的信息，见 [Content Modes](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW2)。关于内容伸展区域如何影响你的视图，见 [Stretchable Views](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/WindowsandViews/WindowsandViews.html#//apple_ref/doc/uid/TP40009503-CH2-SW13)。关于如何处理伸缩因素，见 [*Drawing and Printing Guide for iOS*](https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010156)  中的 [Supporting High-Resolution Screens In Views](https://developer.apple.com/library/ios/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/SupportingHiResScreensInViews/SupportingHiResScreensInViews.html#//apple_ref/doc/uid/TP40010156-CH15)  
 gestureRecognizers，userInteractionEnabled，multipleTouchEnabled，exclusiveTouch | 这些属性影响你的视图如何处理触摸事件。gestureRecognizers 属性包含视图被绑定的手势检测。其他属性控制相应的视图事件。<br />关于如何相应视图的事件，见 [*Event Handling Guide for iOS*](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541)  
 backgroundColor，subviews，drawRect: 方法，layer，(layerClass 方法) | 这些属性和方法帮助你管理你的视图实际的内容。在一个简单的视图中，你可以设置背景颜色和添加一个或多个子视图。subview 属性包含了只读的子视图列表，但它提供了几个添加和移除子视图的方法。对于视图的自定义绘制行为，你必须重写 drawRect: 方法。<br />需要更多先进的内容，你可以直接在核心动画层工作。要为视图指定一个完全不同的层类型，你必须重写 layerClass 方法。 
 
 关于视图所有的通用基础属性，见 [*UIView Class Reference*](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/doc/uid/TP40006816)。更多关于视图的特定属性，见视图的引用文档。
 
 ###为视图将来的使用而添加标签
-UIView 类包含标签 (tag) 属性，你可以用整型值来标记单个视图对象。你可以使用标签独特标记一个你的视图层次中的视图对象并且在运行时搜索这些视图。(基于标签搜索的速度快过遍历视图层次。) 标签属性的默认值是 0。
+UIView 类包含标签 (tag) 属性，你可以用整型值来标记单个视图对象。你可以使用标签独特标记一个你的视图层次结构中的视图对象并且在运行时搜索这些视图。(基于标签搜索的速度快过遍历视图层次结构。) 标签属性的默认值是 0。
 
-要搜索已标签的内容，使用 UIView 的 viewWithTag: 方法。这个方法对接收的参数和它的子视图执行深度优先搜索。它不搜索父视图和视图层次的其他部分。因此，从视图层次的根视图搜索会搜索全部视图而指定特定的视图则会搜索该视图的子集。
+要搜索已标签的内容，使用 UIView 的 viewWithTag: 方法。这个方法对接收的参数和它的子视图执行深度优先搜索。它不搜索父视图和视图层次结构的其他部分。因此，从视图层次结构的根视图搜索会搜索全部视图而指定特定的视图则会搜索该视图的子集。
 
-##创建和管理视图层次结构
-管理视图的层次结构是开发应用程序的用户界面的重要部分。视图的组织方式影响到应用程序的外观和影响到应用程序对发生变化时和事件的响应。例如，父与子关系的视图层次结构判断哪些对象能处理特定的触摸事件。同样，父与子关系也定义了每个视图如何响应界面方向的变化。
+##创建和管理视图层次结构结构
+管理视图的层次结构是开发应用程序的用户界面的重要部分。视图的组织方式影响到应用程序的外观和影响到应用程序对发生变化时和事件的响应。例如，父与子关系的视图层次结构结构判断哪些对象能处理特定的触摸事件。同样，父与子关系也定义了每个视图如何响应界面方向的变化。
 
-图 3-1 例子说明视图何如分层创建所需的应用程序视觉效果。在这个时钟应用程序的案例中，视图的层次结构是来自不同来源的复杂的视图的组合。标签栏和导航视图是特定的视图层次结构提供了标签栏和导航控制器对象用来管理整体用户界面的一部分。这些栏之间的所有东西都属于时钟应用程序提供的自定义层级结构。
+图 3-1 例子说明视图何如分层创建所需的应用程序视觉效果。在这个时钟应用程序的案例中，视图的层次结构是来自不同来源的复杂的视图的组合。标签栏和导航视图是特定的视图层次结构结构提供了标签栏和导航控制器对象用来管理整体用户界面的一部分。这些栏之间的所有东西都属于时钟应用程序提供的自定义层级结构。
 
-**图 3-1 ** 时钟应用程序内的视图层次
+**图 3-1 ** 时钟应用程序内的视图层次结构
 
 ![图 1-7 UIKit 与你的视图对象交互](./windowlayers.jpg)
 
-这里有几种方式在 iOS 中建立视图层次结构，包使用界面构造器的图形化方式和使用代码的编程方式。下面的章节说明如何组合你的视图层次结构，之后会说明如何在层次结构中查找视图和如何在不同的视图坐标系统之间转换。
+这里有几种方式在 iOS 中建立视图层次结构结构，包使用界面构造器的图形化方式和使用代码的编程方式。下面的章节说明如何组合你的视图层次结构结构，之后会说明如何在层次结构中查找视图和如何在不同的视图坐标系统之间转换。
 
 ###添加和移除子视图
-界面构造器是构建视图层次结构最便利的方法因为它提供了图形化的视图，可见看见视图之间的关系，并且这些视图会准确的在运行时出现。当使用界面构造器时，你可以把结果保存在 nib 文件中，当应用程序在运行时可以加载需要的相应的视图。
+界面构造器是构建视图层次结构结构最便利的方法因为它提供了图形化的视图，可见看见视图之间的关系，并且这些视图会准确的在运行时出现。当使用界面构造器时，你可以把结果保存在 nib 文件中，当应用程序在运行时可以加载需要的相应的视图。
 
 如果你喜欢使用编程的方式创建，你可以创建并初始化它们然后使用下面的方法把它们安排到层次结构：
 
@@ -108,7 +111,7 @@ UIView 类包含标签 (tag) 属性，你可以用整型值来标记单个视图
 
 在添加子视图到父视图时，子视图的当前框架矩形代表它在父视图的初始位置。子视图的框架剪切时默认不会超出父视图的可见边界。如果你想你的子视图能被剪切到父视图的边界外，你必须明确的设置父视图的 [clipsToBounds]() 属性为 YES。
 
-大多数常见的添加子视图到其他视图的例子发生在几乎所有应用程序的 application:didFinishLaunchingWithOptions: 方法中。清单 3-1 说明从应用程序的主视图控制器安装视图到应用程序窗口的方法的版本。窗口和视图控制器都是保存在应用程序的主 nib 文件，它们在这个方法被调用之后加载。也就是说，直到 view 属性可以被访问前通过视图控制器管理的视图层次结构并未被加载。
+大多数常见的添加子视图到其他视图的例子发生在几乎所有应用程序的 application:didFinishLaunchingWithOptions: 方法中。清单 3-1 说明从应用程序的主视图控制器安装视图到应用程序窗口的方法的版本。窗口和视图控制器都是保存在应用程序的主 nib 文件，它们在这个方法被调用之后加载。也就是说，直到 view 属性可以被访问前通过视图控制器管理的视图层次结构结构并未被加载。
 
 <br />
 **清单 3-1** 添加视图到窗口
@@ -126,12 +129,12 @@ UIView 类包含标签 (tag) 属性，你可以用整型值来标记单个视图
 }
 ```
 
-另一个常用的添加子视图到视图层次结构的位置是在视图控制器的 [loadView]() 或 [viewDidLoad]() 方法。如果你使用编程方式构建你的视图，你可以把你的视图创建代码放置到视图控制器的 loadVIew 方法。无论你是使用编程方式或从 nib 文件加载它们，你都可以在 viewDidLoad 方法中添加额外的视图配置代码。
+另一个常用的添加子视图到视图层次结构结构的位置是在视图控制器的 [loadView]() 或 [viewDidLoad]() 方法。如果你使用编程方式构建你的视图，你可以把你的视图创建代码放置到视图控制器的 loadVIew 方法。无论你是使用编程方式或从 nib 文件加载它们，你都可以在 viewDidLoad 方法中添加额外的视图配置代码。
 
-清单 3-2 展示了简单应用程序 [*UICatalog:Creating and Customizing UIKit Controls (Obj-C and Swift)*]() 中的 TransitionsViewController 类的 viewDidLoad 方法。TransitionsViewController 类管理两个视图之间转换的关联动画。应用程序通过加载 nib 文件初始化视图层次结构 (由一个根视图和工具栏组成)。这段代码在 viewDidLoad 方法之后创建容器视图和图像视图用作管理转换效果。容器视图的目的是简化实现两个图像视图之间的转换动画效果需要的代码。容器视图自己没有实际的内容。
+清单 3-2 展示了简单应用程序 [*UICatalog:Creating and Customizing UIKit Controls (Obj-C and Swift)*]() 中的 TransitionsViewController 类的 viewDidLoad 方法。TransitionsViewController 类管理两个视图之间转换的关联动画。应用程序通过加载 nib 文件初始化视图层次结构结构 (由一个根视图和工具栏组成)。这段代码在 viewDidLoad 方法之后创建容器视图和图像视图用作管理转换效果。容器视图的目的是简化实现两个图像视图之间的转换动画效果需要的代码。容器视图自己没有实际的内容。
 
 <br />
-**清单 3-2** 添加视图到已有的视图层次结构
+**清单 3-2** 添加视图到已有的视图层次结构结构
 
 ```
 - (void)viewDidLoad
@@ -166,26 +169,26 @@ UIView 类包含标签 (tag) 属性，你可以用整型值来标记单个视图
 
 >**重要提示：**父视图自动 retain 它们的子视图，因此之后嵌入的子视图它会安全的释放。事实上，是推荐这样做的因为它防止你的应用程序长期保留视图导致以后的内存泄漏。只需记住如果你从父视图移除子视图并打算重复使用它，你必须再次 retain 子视图。从父视图移除子视图后 removeFromSuperview 方法自动释放子视图。如果你下次重复使用时没有 retain 子视图，该视图将会被释放。<br /> 更多关于 Cocoa 的内存管理约定，见 [*Advanced Memory Management Programming Guide*]()。
 
-当你添加子视图到其他视图时，UIKit 通知父视图和子视图已发生更改。如果你实现自定义视图，你可以通过重写一个或更多方法截取这些通知：[willMoveToSuperview:]()，[willMoveToWindow:]()，[willRemoveSubview:]()，[didAddSubview:]()，[didMoveToSuperview](),或 [didMoveToWindow]()。你可以使用这些通知更新任何状态信息相关的到你的视图层次结构中或执行额外的任务。
+当你添加子视图到其他视图时，UIKit 通知父视图和子视图已发生更改。如果你实现自定义视图，你可以通过重写一个或更多方法截取这些通知：[willMoveToSuperview:]()，[willMoveToWindow:]()，[willRemoveSubview:]()，[didAddSubview:]()，[didMoveToSuperview](),或 [didMoveToWindow]()。你可以使用这些通知更新任何状态信息相关的到你的视图层次结构结构中或执行额外的任务。
 
-创建了视图层次结构后，你可以以编程的方式使用视图的 superview 和 subviews 属性浏览它。每个视图的 window 属性包含当前显示视图的窗口 ( 如果它有)。因为跟视图在视图层次结构中没有父视图，它的 superview 属性被设置为 nil。对于当前屏幕的视图，窗口对象是视图层次结构的根视图。
+创建了视图层次结构结构后，你可以以编程的方式使用视图的 superview 和 subviews 属性浏览它。每个视图的 window 属性包含当前显示视图的窗口 ( 如果它有)。因为跟视图在视图层次结构结构中没有父视图，它的 superview 属性被设置为 nil。对于当前屏幕的视图，窗口对象是视图层次结构结构的根视图。
 
 ###隐藏视图
-要从视觉上隐藏视图，你可以设置 [hidden]() 属性为 YES 或更改它的 [alpha]() 属性为 0.0。一旦隐藏视图后将不再从系统接收触摸事件。并且，隐藏视图后不再参与视图层次关联的自动缩放和其他布局操作。隐藏视图提供便利的操作替代从视图层次结构移除视图，尤其是你计划在再次显示视图时。
+要从视觉上隐藏视图，你可以设置 [hidden]() 属性为 YES 或更改它的 [alpha]() 属性为 0.0。一旦隐藏视图后将不再从系统接收触摸事件。并且，隐藏视图后不再参与视图层次结构关联的自动缩放和其他布局操作。隐藏视图提供便利的操作替代从视图层次结构结构移除视图，尤其是你计划在再次显示视图时。
 
 >**重要提示：**若你隐藏的视图是当前层次第一个响应者，视图不会自动移除它的响应者身份。事件传递的目标仍然是第一个响应者，也就是被隐藏的视图。要避免这个情况，你应该在隐藏视图时强制使视图移除它的第一响应者状态。更多关于响应队列的信息，见 [*Evebt Handling Guide for iOS*]()。
 
 如果你想视图在隐藏和显示时添加动画效果，你必须使用视图的 alpha 属性。hidden 属性是不可动画的属性，因此你变更改属性后会立即生效。
 
-###在视图层次结构定位视图
-有两种方式在视图层次结构定位视图：
+###在视图层次结构结构定位视图
+有两种方式在视图层次结构结构定位视图：
 
 - 在适当的位置保存相应的视图指针，例如在视图控制器自己的视图中。
 - 为每个视图的 [tag](http://) 属性分配无符号整形并使用 [viewWithTag:](http://) 方法定位它。
 
 保存相应视图的引用是最通用的定位视图途径并且访问这些视图非常方便。如果你使用界面构造器构建你的视图，你可以在你的 nib 文件 (包括代表管理控制器对象的文件拥有者对象) 使用 [outlet](http://) 连接对象到其他一个。如果你使用编程方式，你可以保存视图的引用为私有成员变量。无论你使用 outlets 或 私有成员变量，你都要负责必要的保持和释放它们。最好的确认对象被正确保留和释放的方式是使用 [declared properties](http://)。
   
-  Tag 是有效的减少硬编码依赖的方式并且支持更多动态和灵活的解决方案。与保存视图指针相比，你可以使用 tag 定位它。Tag 也是更持久的指向视图的方式。例如，你如果你想在应用程序中保存当前可见视图的列表，你会写出每个可见视图的 tag 到文件中。这比归档实际视图对象要简单，尤其在你正在追踪仅是当前可见的视图的情况下。当你的应用程序随后被加载，你就可以使用已保存的 tag 列表重新创建你的视图设置每个视图的可见性，从而使视图层次结构回到之前的状态。
+  Tag 是有效的减少硬编码依赖的方式并且支持更多动态和灵活的解决方案。与保存视图指针相比，你可以使用 tag 定位它。Tag 也是更持久的指向视图的方式。例如，你如果你想在应用程序中保存当前可见视图的列表，你会写出每个可见视图的 tag 到文件中。这比归档实际视图对象要简单，尤其在你正在追踪仅是当前可见的视图的情况下。当你的应用程序随后被加载，你就可以使用已保存的 tag 列表重新创建你的视图设置每个视图的可见性，从而使视图层次结构结构回到之前的状态。
 
 ###翻转，伸展，和旋转视图
 每个视图都有关联的仿射转换，你可以用来翻转，伸展，或旋转视图的内容。视图转换后完成视图的外观渲染并且提供用作实现滚动，动画效果，或其他视觉效果。
@@ -208,7 +211,7 @@ self.view.transform = xform;
 
 更多关于创建和使用仿射转换的信息，见 [*Quartz 2D Programming Guide*]() 中的 [Transforms](http://)。
 
-###在视图层次结构中转换坐标
+###在视图层次结构结构中转换坐标
 在不同的时间，尤其在处理事件时，应用程序可能需要从一个引用的框架转换坐标值到另一个。例如，触摸事件报告在窗口坐标系统中每个触摸的位置但视图对象通常需要视图的本地坐标系统信息。 [UIView](http://) 类定义了下面的方法将坐标从视图的本地坐标系统转出或转换到本地坐标系统：
 
 - [convertPoint:fromView:](http://)
@@ -233,7 +236,7 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 ![image](./uiview_convert_rotated.jpg)
 
 ##在运行时调整视图的尺寸和位置
-每当视图的尺寸更改，它的子视图的尺寸和位置也必须跟随更改。[UIView](http://) 支持在视图层次结构中的视图的自动和手动布局。对于自动布局，你只需设置每个视图应该如何跟随当父视图调整时的规则，然后就可以不管之后的调整操作了。对于手动布局，根据需要手动调整视图的尺寸和位置。
+每当视图的尺寸更改，它的子视图的尺寸和位置也必须跟随更改。[UIView](http://) 支持在视图层次结构结构中的视图的自动和手动布局。对于自动布局，你只需设置每个视图应该如何跟随当父视图调整时的规则，然后就可以不管之后的调整操作了。对于手动布局，根据需要手动调整视图的尺寸和位置。
 
 ###布局变更的准备
 布局变更会在每当下面的事件在视图中发生时：
@@ -246,7 +249,7 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 ###使用自动调整规则自动处化理布局变更
 当你更改视图的尺寸时，被嵌入的子视图的位置和尺寸通常需要根据父视图的新尺寸变更。父视图的 [autoresizesSubviews](http://) 属性决定所有子视图是否需要调整。如果属性设置为 YES，视图会使用每个子视图的 [autoresizingMask](http://) 属性决定子视图的位置和尺寸。每个子视图的尺寸变更会触发它们嵌入的子视图同样的布局调整。
 
-在你的视图层次结构中的每个视图，设置 autoresizingMask 属性一个适当的值对于自动化处理布局变更是非常重要的一部分。表 3-2 列出你可以应用的自动调整选项并且描述了它们在布局操作时的效果。你可以使用 OR 运算符组合这些常量或在分配他们到 autoresizingMask 属性之前把它们加到一起。如果你是使用界面构造器组合你的视图，你可以在 Autosizing inspector 设置这些属性。
+在你的视图层次结构结构中的每个视图，设置 autoresizingMask 属性一个适当的值对于自动化处理布局变更是非常重要的一部分。表 3-2 列出你可以应用的自动调整选项并且描述了它们在布局操作时的效果。你可以使用 OR 运算符组合这些常量或在分配他们到 autoresizingMask 属性之前把它们加到一起。如果你是使用界面构造器组合你的视图，你可以在 Autosizing inspector 设置这些属性。
 
 <br />
 **表 3-2** 自动调整掩码常量
@@ -296,19 +299,19 @@ UIViewAutoresizingFlexibleTopMargin | 视图的顶部边缘和父视图的顶部
 当应用程序从用户中接收到输入，它们会在响应输入时调整用户界面。应用程序可能重新排列视图，更改尺寸或位置，隐藏或显示它们，或加载一个完整的新的视图集合。在 iOS 应用程序中，这里是执行这些动作的种类几个地方和方式：
 
 - 在视图控制器中：
-	- 视图控制器在显示视图之前已创建它们。视图控制器可以从 nib 文件加载视图或使用编程方式创建它们。当这些视图已经长期不需要时，它会抛弃它们。
-	- 当设备变更方向时，视图控制器可能会调整视图的尺寸和位置适配。作为调整新的方向的一部分，它可能会隐藏视图和显示其他内容。
-	- 当视图控制器管理可编辑的内容时，当进入编辑模式时它可能会调整视图层级结构。例如，它可能添加额外的按钮和其他控件方便编辑内容的各个方面。也可能需要调整视图的尺寸容纳额外的控件。
+    - 视图控制器在显示视图之前已创建它们。视图控制器可以从 nib 文件加载视图或使用编程方式创建它们。当这些视图已经长期不需要时，它会抛弃它们。
+    - 当设备变更方向时，视图控制器可能会调整视图的尺寸和位置适配。作为调整新的方向的一部分，它可能会隐藏视图和显示其他内容。
+    - 当视图控制器管理可编辑的内容时，当进入编辑模式时它可能会调整视图层级结构。例如，它可能添加额外的按钮和其他控件方便编辑内容的各个方面。也可能需要调整视图的尺寸容纳额外的控件。
 - 在动画效果块中：
-	- 当你想添加用户界面中不同的视图集合之间的转换效果，你会隐藏一些视图和显示其他来自动画效果块内部的视图。
-	- 在实现特别的效果时，你可能会使用一个动画效果块去修改视图的各个属性。例如，一个更改视图尺寸的动画，你会更改它的框架矩形尺寸。
-	 
+    - 当你想添加用户界面中不同的视图集合之间的转换效果，你会隐藏一些视图和显示其他来自动画效果块内部的视图。
+    - 在实现特别的效果时，你可能会使用一个动画效果块去修改视图的各个属性。例如，一个更改视图尺寸的动画，你会更改它的框架矩形尺寸。
+     
 - 其他方式：
-	- 当触摸事件或手势发生时，你的界面可能会通过加载新的视图集合或更改当前视图集合来响应事件。关于处理事件的信息，见 [*Event Handling Guide for iOS*](http://)。
-	- 当用户与滚动视图交互时，一个巨大的可滚动区域可能会隐藏和显示分片的子视图。更多对可滚动内容支持的信息，见 [*Scroll View Programming Guide for iOS*](http://)。
-	- 当键盘出现时，你可能会重新定位或调整视图使它们不会躺在键盘的下方。关于如何与键盘交互的信息，见 [*Text Programming Guide for iOS*](http://)。
-	
-视图控制器是初始换更改视图的常用地方。因为视图控制器管理视图层次结构关联的内容的显示，它最终负责这些视图发生的所有事情。当加载它的视图或处理方向更改时，视图控制器可以添加新的视图，隐藏或替换已有的视图，和做一些改变使视图准备显示。如果你声明了对你的内容的编辑，在 UIViewController 中的 [setEditing:animated:](http://) 方法给你一个地方让你的视图转换为它的可编辑版本。
+    - 当触摸事件或手势发生时，你的界面可能会通过加载新的视图集合或更改当前视图集合来响应事件。关于处理事件的信息，见 [*Event Handling Guide for iOS*](http://)。
+    - 当用户与滚动视图交互时，一个巨大的可滚动区域可能会隐藏和显示分片的子视图。更多对可滚动内容支持的信息，见 [*Scroll View Programming Guide for iOS*](http://)。
+    - 当键盘出现时，你可能会重新定位或调整视图使它们不会躺在键盘的下方。关于如何与键盘交互的信息，见 [*Text Programming Guide for iOS*](http://)。
+    
+视图控制器是初始换更改视图的常用地方。因为视图控制器管理视图层次结构结构关联的内容的显示，它最终负责这些视图发生的所有事情。当加载它的视图或处理方向更改时，视图控制器可以添加新的视图，隐藏或替换已有的视图，和做一些改变使视图准备显示。如果你声明了对你的内容的编辑，在 UIViewController 中的 [setEditing:animated:](http://) 方法给你一个地方让你的视图转换为它的可编辑版本。
 
 动画效果块是另一个常用的初始化视图相关的更改的地方。动画效果支持建立到 [UIView](http://) 类中让它轻松的用动画形式更改视图的属性。你也可以使用 [transitionWithView:duration:options:animations:completion:](http://) 或 [transitionFromView:toView:duration:options:completion:](http://) 方法更换完整的视图集合为新的一个。
 
@@ -340,7 +343,7 @@ UIViewAutoresizingFlexibleTopMargin | 视图的顶部边缘和父视图的顶部
 更多关于核型动画提供的不同类型的层对象，见 [*Core Animation Reference Collection*](http://)。
 
 ###在视图中嵌入层对象
-如果你打算主要与层对象工作而不是与视图工作，你可以按需要把自定义层对象合并到你的视图层次结构中。自定义层对象是 [CALayer](http://) 的实例它不属于视图拥有。通常使用编程方式创建自定义层然后使用核心动画效果程序合并它们。自定义层不接收事件和不参与响应者队列但会绘制它们并且响应它们的父视图的尺寸更改或层根据核心动画效果规则的尺寸更改。
+如果你打算主要与层对象工作而不是与视图工作，你可以按需要把自定义层对象合并到你的视图层次结构结构中。自定义层对象是 [CALayer](http://) 的实例它不属于视图拥有。通常使用编程方式创建自定义层然后使用核心动画效果程序合并它们。自定义层不接收事件和不参与响应者队列但会绘制它们并且响应它们的父视图的尺寸更改或层根据核心动画效果规则的尺寸更改。
 
 清单 3-3 展示了在一个视图控制器的 viewDidLoad 方法中创建自定义层对象并且添加它到它的根视图的例子。这个层对象被用作用动画显示静态图片。除了添加层到视图本身外，你也可以添加它到视图的底层 (underlying layer)。
 
@@ -394,18 +397,18 @@ UIViewAutoresizingFlexibleTopMargin | 视图的顶部边缘和父视图的顶部
 自定义视图的工作是呈现内容并管理与内容的交互。但是完美的自定义视图实现涉及到很多的绘制和事件处理。下面的检查清单包含许多在实现自定义视图时你可以重写的方法 (和你可以提供的行为)。
 
 -  为你的视图定义外观的初始化方法：
-	- 如果打算以编程方式创建视图，重写 []initWithFrame:](http://) 方法或定义自定义初始化方法。 
-	- 如果打算以从 nib 文件加载，重写 [initWothCoder:](http://) 方法。使用这个方法初始化你的视图并把它放入已知状态。
+    - 如果打算以编程方式创建视图，重写 []initWithFrame:](http://) 方法或定义自定义初始化方法。 
+    - 如果打算以从 nib 文件加载，重写 [initWothCoder:](http://) 方法。使用这个方法初始化你的视图并把它放入已知状态。
 -  实现 [dealloc](http://) 方法处理自定义数据的清除操作。
 -  要处理自定义视图的绘制，需要重写 [drawRect:](http://) 方法并在这里实现绘制代码。
 -  设置视图的 [autoresizingMask](http://) 属性定义它的自动调整行为。
 -  如果你的视图类管理一个或多个完整的子视图，要做以下事情：
-	-  在你的视图的初始化序列期间创建这些子视图。
-	- 在创建时设置每个子视图的 [autoresizingMask](http://) 属性。
-	- 如果你的子视图需要自动布局，重写 [layoutSubviews](http://) 方法并且在那实现你的布局代码。
+    -  在你的视图的初始化序列期间创建这些子视图。
+    - 在创建时设置每个子视图的 [autoresizingMask](http://) 属性。
+    - 如果你的子视图需要自动布局，重写 [layoutSubviews](http://) 方法并且在那实现你的布局代码。
 -  处理基于触摸的事件，要做以下事情：
-	-  通过使用 addGestureRecognizer: 方法绑定手势识别到视图中。
-	- 有你想自己处理触摸的情景，重写 [touchesBegan:withEvent:](http://)，[touchesMoved:withEvent:](http://)，[touchesEnded:withEvent:](http://)，和 [touchesCancelled:withEvent:](http://) 方法。(记住你应该始终重写 [touchesCancelled:withEvent:](http://) 方法，无论你是否重写了其他的触摸相关的方法。)
+    -  通过使用 addGestureRecognizer: 方法绑定手势识别到视图中。
+    - 有你想自己处理触摸的情景，重写 [touchesBegan:withEvent:](http://)，[touchesMoved:withEvent:](http://)，[touchesEnded:withEvent:](http://)，和 [touchesCancelled:withEvent:](http://) 方法。(记住你应该始终重写 [touchesCancelled:withEvent:](http://) 方法，无论你是否重写了其他的触摸相关的方法。)
 -  如果你让视图的打印版本看起来与屏幕版本不同，需要实现 [drawRect:forViewPrintFormatter:](http://) 方法。关于如何在你的视图中实现对打印的支持的详细信息，见 [*Drawing and Printing Guide for iOS*](http://)
 
 除了重写方法外，记住还有很多你可以操作的视图已有的属性和方法。例如，[contentMode](http://) 和 [contentStretch](http://) 方法能让你更改视图的最终渲染的外观并且可以完美的绘制你的内容。除了 [UIView](http://) 类本身外，还有视图的底层 [CALayer](http://) 对象的你可以直接或间接配置的许多方面。你甚至可以更改层对象自身的类。
