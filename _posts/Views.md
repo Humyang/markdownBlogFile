@@ -231,28 +231,28 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 - [convertPoint:toWindow:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIWindow_Class/index.html#//apple_ref/occ/instm/UIWindow/convertPoint:toWindow:)
 - [convertRect:toWindow:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIWindow_Class/index.html#//apple_ref/occ/instm/UIWindow/convertRect:toWindow:)
 
-当在一个已旋转的视图中转换坐标时，UIKit 根据“你希望返回的矩形是代表被源矩形覆盖的屏幕区域”的猜测下来转换矩形。图 3-3 例子说明旋转是如何导致矩形的尺寸在转换期间的被更改。在这个图中，外部视图包含已旋转的子视图。从子视图的坐标系统转换到父视图的坐标系统后的产生一个物理上较大的矩形。这个较大的矩形实际上是较小的矩形在外部视图的边界它已完全包围已旋转的矩形。
+当在一个已旋转的视图中转换坐标时，UIKit 根据“你希望返回的矩形是代表被源矩形覆盖的屏幕区域”的猜测来转换矩形。图 3-3 例子说明旋转是如何导致矩形的尺寸在转换期间的被更改。在这个图中，外部视图包含已旋转的子视图。从子视图的坐标系统转换到父视图的坐标系统后的产生一个物理上较大的矩形。这个较大的矩形实际上是较小的矩形在外部视图的边界它完全包围已旋转的矩形。
 
 <br />
-**图 3-3 在已旋转视图转换值**
+**图 3-3 在已旋转的视图中转换值**
 
 ![image](./uiview_convert_rotated.jpg)
 
 ##在运行时调整视图的尺寸和位置
-每当视图的尺寸更改，它的子视图的尺寸和位置也必须跟随更改。[UIView](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView) 支持在视图层次结构中的视图的自动和手动布局。对于自动布局，你只需设置每个视图应该如何跟随当父视图调整时的规则，然后就可以不管之后的调整操作了。对于手动布局，根据需要手动调整视图的尺寸和位置。
+每当视图的尺寸更改时，它的子视图尺寸和位置也必须相应的更改。[UIView](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView) 支持在视图层次结构中自动和手动布局视图。对于自动布局，你只需设置每个视图应该如何跟随当父视图调整时的规则，然后就可以不管以后的调整操作了。对于手动布局，根据需要手动调整视图的尺寸和位置。
 
-###布局变更的准备
-布局变更会在每当下面的事件在视图中发生时：
-- 视图边界矩形的尺寸更改。
-- 界面方向发生更改，这个事件通常会在根视图的边界矩形触发。
-- 与核心动画子层的集合关联的视图的层发生变更并需要布局。
-- 应用程序通过调用视图的 [setNeedsLayout](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsLayout) 或 [layoutIfNeeded](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/layoutIfNeeded) 方法发生强制布局。
-- 应用程序通过调用视图的底层对象的 [setNeedsLayout](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/instm/CALayer/setNeedsLayout) 方法强制布局。
+###准备布局变更
+每当下面的事件在视图中发生时会产生布局变更：
+- 视图的边界矩形的尺寸更改。
+- 界面方向发生更改，通常会在根视图的边界矩形触发这个事件。
+- 与核心动画效果子层集合关联的视图层发生变更并和需要布局。
+- 应用程序通过调用视图的 [setNeedsLayout](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsLayout) 或 [layoutIfNeeded](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/layoutIfNeeded) 方法产生强制布局。
+- 应用程序通过调用视图的底层的层对象的 [setNeedsLayout](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/instm/CALayer/setNeedsLayout) 方法强制布局。
 
-###使用自动调整规则自动处化理布局变更
-当你更改视图的尺寸时，被嵌入的子视图的位置和尺寸通常需要根据父视图的新尺寸变更。父视图的 [autoresizesSubviews](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/autoresizesSubviews) 属性决定所有子视图是否需要调整。如果属性设置为 YES，视图会使用每个子视图的 [autoresizingMask](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/autoresizingMask) 属性决定子视图的位置和尺寸。每个子视图的尺寸变更会触发它们嵌入的子视图同样的布局调整。
+###使用自动调整尺寸规则自动处化理布局变更
+当你更改视图的尺寸时，被嵌入的子视图的位置和尺寸通常需要根据父视图的新尺寸变更。父视图的 [autoresizesSubviews](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/autoresizesSubviews) 属性决定所有子视图是否需要调整。如果属性设置为 YES，视图会使用每个子视图的 [autoresizingMask](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/autoresizingMask) 属性决定子视图的位置和尺寸。每个子视图的尺寸变更会对它们的子视图触发同样的布局调整。
 
-在你的视图层次结构中的每个视图，设置 autoresizingMask 属性一个适当的值对于自动化处理布局变更是非常重要的一部分。表 3-2 列出你可以应用的自动调整选项并且描述了它们在布局操作时的效果。你可以使用 OR 运算符组合这些常量或在分配他们到 autoresizingMask 属性之前把它们加到一起。如果你是使用界面构造器组合你的视图，你可以在 Autosizing inspector 设置这些属性。
+在视图层次结构中的每个视图中，设置视图的 autoresizingMask 属性一个适当的值对自动化处理布局变更是非常重要的一部分。表 3-2 列出你可以应用的自动调整选项并且描述了它们在布局操作时的效果。你可以使用 OR 运算符组合这些常量或把它们分配到 autoresizingMask 属性之前相加。如果你是使用界面构造器组合你的视图，你可以使用 Autosizing inspector 设置这些属性。
 
 <br />
 **表 3-2** 自动调整掩码常量
@@ -267,71 +267,73 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 [UIViewAutoresizingFlexibleBottomMargin](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewAutoresizingFlexibleBottomMargin) | 视图的底部边缘和父视图的底部边缘之间的距离根据需要增长或缩短。如果这个常量没有设置，视图的底部边缘与父视图的底部边缘之间的距离保持固定。
 [UIViewAutoresizingFlexibleTopMargin](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewAutoresizingFlexibleTopMargin) | 视图的顶部边缘和父视图的顶部边缘之间的距离根据需要增长或缩短。如果这个常量没有设置，视图的顶部边缘与父视图的顶部边缘之间的距离保持固定。
  
-图 3-4 显示的图像说明自动调整掩码中的选项如何应用到视图中。已设置的常量说明视图的指定的方面是灵活的和父视图的边界变更时视图也会相应变更。没设置的常量说明视图的布局在某些方面是固定的。当你在视图的一个轴上配置一个或多个灵活属性时，UIKit 会把尺寸的更改均匀的分配到相应的空间。
+图 3-4 以图像化方式表示自动调整掩码中的选项如何在视图中应用。已给定常量说明视图的特定的方面是灵活的和父视图的边界变更时视图也会相应变更。没给定常量说明视图的布局在某些方面是固定的。当你在视图的一个轴上配置一个或多个灵活属性时，UIKit 会把尺寸更改平均的分配到相应空间。
 
 **图 3-4** 视图的自动调整掩码常量
 ![image](./uiview_autoresize.jpg)
 
-最简单配置自动调整规则的方式是使用界面构造器的 Size inspector 中的自动调整大小控制。在自动调整大小界面的宽度和尺寸指示器与上图中灵活的宽度和高度常量拥有相同的行为。但是，边缘指示器的行为和使用与前面的相反。在界面构造器中，已设置的边缘指示器以为着边缘有固定的尺寸而没设置的边缘指示器意味着边缘有灵活的尺寸。幸运的是，界面构造器提供了一个动画效果让你清楚自动调整行为如何影响到你的视图。
+最简单配置自动调整规则的方式是使用界面构造器的 Size inspector 中的自动调整大小控制。在自动调整大小界面的宽度和尺寸指示器与上图中灵活的宽度和高度常量拥有相同的行为。但是，边缘指示器的行为和使用与前面的效果相反。在界面构造器中，已给定边缘指示器意味着边缘有固定的尺寸而没给定边缘指示器意味着边缘有灵活的尺寸。幸运的是，界面构造器提供了一个动画效果让你清楚自动调整行为如何影响你的视图。
 
-> **重要提示：** 如果视图的 [transform](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/transform) 属性没有设置为恒等转换，那么视图的 frame 是未定义的所以它可以自动调整。
+> **重要提示：** 如果视图的 [transform](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/transform) 属性不包含恒等转换，那么它的视图的框架是不明确的因此它的自动调整结果也是。
 
-所有受影响的视图已经应用了自动调整规则后，UIKit 返回每个视图并给它机会对父视图做必要的手动调整。更多关于如何手动管理视图的布局的信息，见 [Tweaking the Layout of Your Views Manually](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW48)。
+所有的自动调整尺寸规则已经对受影响的视图应用后，UIKit 返回每个视图并给它机会对父视图做一些必要的手动调整。更多关于如何手动管理视图的布局信息，见 [Tweaking the Layout of Your Views Manually](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW48)。
 
 
 ###手动调整你的视图布局
-每当你的视图尺寸发生变化时，UIKit 应用视图的父视图的自动调整尺寸行为然后调用视图的 [layoutSubviews](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/layoutSubviews) 方法让它可以手动更改。当自定义视图的自己自动调整行为没有产生你想要的结果时你可以实现自定义视图的 layoutSubviews 方法。在这个方法的实现中你可以做一下行为：
+每当你的视图尺寸发生变化时，UIKit 应用视图的子视图的自动调整尺寸行为然后调用视图的 [layoutSubviews](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/layoutSubviews) 方法让它可以手动更改。当它们自己的自动调整尺寸行为没有产生你想要的结果时你可以在自定义视图内实现 layoutSubviews 方法。在这个方法的实现中你可以做以下事情：
 
 - 调整任意直系子视图的位置和尺寸。
 - 添加或移除子视图或核心动画层。
 - 通过调用 [setNeedsDisplay](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsDisplay) 或 [setNeedsDisplayInRect:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsDisplayInRect:) 方法强制子视图重绘。
 
-应用程序经常手动布局子视图的地方是在实现巨大的可滚动区域时。因为在一个巨大的视图中完成滚动内容是不切实际的，应用程序经常会实现一个包含小片视图的数字的根视图。每一个小片代表可滚动内容的一部分。当滚动事件发生时，根视图调用 setNeedsLayout 方法初始化布局变更。[layoutSubviews](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsLayout) 方法然后基于已发生的滚动数量重新定位片视图。对于已滚动出去视图可见区域的片，layoutSubviews 方法移动该片到输入边缘，在处理过程中更换它们的内容。
+应用程序经常手动布局子视图的位置是在实现一个巨大的可滚动区域时。因为在一个巨大的视图中滚动它的内容是不切实际的，应用程序通畅会实现一个包含小片视图编号的根视图。每一个小片代表滚动内容的一部分。当滚动事件发生时，根视图调用 setNeedsLayout 方法初始化布局变更。它的 [layoutSubviews](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/setNeedsLayout) 方法基于已发生的滚动数量重新定位分片视图。对于已滚动出视图可见区域的片，layoutSubviews 方法将该片移动到边缘，在处理过程中更换它们的内容。
 
-当你在写布局代码时，请确认你的代码已在以下方面测试：
+当你在写布局代码时，请确认你的代码已经过以下方面测试：
 
-- 更改视图方向确认布局在所有的方向看都是正确的。
+- 更改视图方向确认布局在所有支持的界面方向都正确。
 - 确认你的代码适当的响应状态栏高度的更改。当电话呼叫是活动时，状态栏高度会提升，而当用户挂断电话时，状态栏尺寸会降低。
 
-关于自动调整行为如何影响你的视图的尺寸和位置，见 [Handling Layout Changes Automatically Using Autoresizing Rules](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW5)。关于如何显现视图分片的例子，见案例 ScrollViewSuite。
+关于自动调整行为如何影响视图的尺寸和位置，见 [Handling Layout Changes Automatically Using Autoresizing Rules](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/CreatingViews/CreatingViews.html#//apple_ref/doc/uid/TP40009503-CH5-SW5)。
+
+关于如何实现分片，见案例 ScrollViewSuite。
 
 
 
 
 ##在运行时修改视图
-当应用程序从用户中接收到输入，它们会在响应输入时调整用户界面。应用程序可能重新排列视图，更改尺寸或位置，隐藏或显示它们，或加载一个完整的新的视图集合。在 iOS 应用程序中，这里是执行这些动作的种类几个地方和方式：
+当应用程序从用户中接收到输入后，它们会在响应输入调整用户界面。应用程序可能重新排列视图，更改尺寸或位置，隐藏或显示它们，或加载一个新的完整视图集合。在 iOS 应用程序中，这里是让你执行这些类型的操作的几个位置和途径：
 
 - 在视图控制器中：
-    - 视图控制器在显示视图之前已创建它们。视图控制器可以从 nib 文件加载视图或使用编程方式创建它们。当这些视图已经长期不需要时，它会抛弃它们。
-    - 当设备变更方向时，视图控制器可能会调整视图的尺寸和位置适配。作为调整新的方向的一部分，它可能会隐藏视图和显示其他内容。
-    - 当视图控制器管理可编辑的内容时，当进入编辑模式时它可能会调整视图层级结构。例如，它可能添加额外的按钮和其他控件方便编辑内容的各个方面。也可能需要调整视图的尺寸容纳额外的控件。
+    - 视图控制器在显示之前创建它的视图。视图控制器可以从 nib 文件加载视图或使用编程方式创建它们。当这些视图长时间不需要时，它会抛弃它们。
+    - 当设备变更方向时，视图控制器可能会调整视图的尺寸和位置适配。作为新方向调整的一部分，它可能会隐藏一些视图和显示其它。
+    - 当视图控制器管理着可编辑的内容，进入编辑模式时它可能会调整视图层级结构。例如，它可能添加额外的按钮和其他控件方便的编辑它的内容的各个方面。也可能需要调整视图的尺寸容纳额外的控件。
 - 在动画效果块中：
-    - 当你想添加用户界面中不同的视图集合之间的转换效果，你会隐藏一些视图和显示其他来自动画效果块内部的视图。
-    - 在实现特别的效果时，你可能会使用一个动画效果块去修改视图的各个属性。例如，一个更改视图尺寸的动画，你会更改它的框架矩形尺寸。
+    - 你想在用户界面中的不同集合的视图之间过渡，你可以从动画效果块内容隐藏一些视图和显示其他视图。
+    - 在实现指定的效果时，你可以使用一个动画效果块修改各方面的视图属性。例如，用动画更改视图的尺寸，你会更改它的框架矩形的尺寸。
      
 - 其他方式：
-    - 当触摸事件或手势发生时，你的界面可能会通过加载新的视图集合或更改当前视图集合来响应事件。关于处理事件的信息，见 [*Event Handling Guide for iOS*](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541)。
-    - 当用户与滚动视图交互时，一个巨大的可滚动区域可能会隐藏和显示分片的子视图。更多对可滚动内容支持的信息，见 [*Scroll View Programming Guide for iOS*](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/UIScrollView_pg/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008179)。
-    - 当键盘出现时，你可能会重新定位或调整视图使它们不会躺在键盘的下方。关于如何与键盘交互的信息，见 [*Text Programming Guide for iOS*](https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009542)。
+    - 当触摸事件或手势发生时，你的界面可能会通过加载新的视图集合或更改当前的视图集合来响应事件。关于处理事件的信息，见 [*Event Handling Guide for iOS*](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541)。
+    - 当用户与滚动视图交互时，一个巨大的可滚动区域会隐藏和显示已分片的子视图。更多支持可滚动内容的信息，见 [*Scroll View Programming Guide for iOS*](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/UIScrollView_pg/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008179)。
+    - 当键盘出现时，你需要重新定位或调整视图使它们不会位于键盘的下方。关于如何与键盘交互的信息，见 [*Text Programming Guide for iOS*](https://developer.apple.com/library/ios/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009542)。
     
-视图控制器是初始换更改视图的常用地方。因为视图控制器管理视图层次结构关联的内容的显示，它最终负责这些视图发生的所有事情。当加载它的视图或处理方向更改时，视图控制器可以添加新的视图，隐藏或替换已有的视图，和做一些改变使视图准备显示。如果你声明了对你的内容的编辑，在 UIViewController 中的 [setEditing:animated:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/setEditing:animated:) 方法给你一个地方让你的视图转换为它的可编辑版本。
+视图控制器是初始化更改视图的常用位置。因为视图控制器管理与正在显示的内容相关的视图层次结构，它最终负责这些视图发生的所有事情。当正在加载它的视图或正常处理方向更改时，视图控制器可以添加新的视图，隐藏或替换已有的视图，和做任意数量的更改为视图的显示做准备。如果你的内容声明了可编辑，在 UIViewController 中的 [setEditing:animated:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/setEditing:animated:) 方法给你一个位置过渡为你的视图到它的可编辑版本。
 
-动画效果块是另一个常用的初始化视图相关的更改的地方。动画效果支持建立到 [UIView](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView) 类中让它轻松的用动画形式更改视图的属性。你也可以使用 [transitionWithView:duration:options:animations:completion:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/transitionWithView:duration:options:animations:completion:) 或 [transitionFromView:toView:duration:options:completion:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/transitionFromView:toView:duration:options:completion:) 方法更换完整的视图集合为新的一个。
+动画效果块是另一个常用的初始化与视图相关的更改的位置。动画效果支持置入到 [UIView](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/cl/UIView) 类中让它轻松的用动画形式更改视图的属性。你也可以使用 [transitionWithView:duration:options:animations:completion:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/transitionWithView:duration:options:animations:completion:) 或 [transitionFromView:toView:duration:options:completion:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/transitionFromView:toView:duration:options:completion:) 方法将完整的视图集合更换成新的一个。
 
-更多关于动画视图和初始化视图转换效果的信息，见 [Animations](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW1)。
+更多关于动画视图和初始化视图过渡效果的信息，见 [Animations](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW1)。
 
 更多如何使用视图控制器管理视图相关的行为，见 [*View Controller Programming Guide for iOS*](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457)。
 
 
 ##与核心动画层交互
 
-每个视图对象都有专用的核心动画层用来管理视图在屏幕上的呈现和动画效果。你可以对你的视图对象做很多事情，你也可以按需要直接在相应的层对象工作。层对象被保存在视图的 [layer](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/layer) 属性。
+每个视图对象都有专用的核心动画层用来管理视图在屏幕上的呈现和动画效果。尽管你可以对视图对象做很多事情，你也可以按需要直接与相应的层对象工作。视图的层对象被保存在视图的 [layer](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/layer) 属性。
 
-###修改与视图关联的分层类
+###修改与视图关联的层类
 
-与视图关联的层类型不能再视图被创建后更改。因此，每个视图的使用 [layerClass](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/layerClass) 类方法指定层对象的类。这个方法默认的实现是返回 [CALayer](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/cl/CALayer) 类并且只能从子类更改这个值，重写这个方法，返回不同的值。你可以使用不同类型的层更改这个值。例如，如果你的视图使用分片显示一个巨大的可滚动区域，你可能想使用 [CATileLayer](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/cl/CALayer) 类返回给视图。
+与视图关联的层的类型不能在视图创建后被更改。因此，每个视图的使用类方法 [layerClass](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/layerClass) 为层对象指定类。这个方法默认的实现是返回 [CALayer](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/cl/CALayer) 类并且这个值只接受 CALayer 的子类，通过重写这个方法，返回不同的值。你可以更改这个值使用不同类型的层。例如，如果你的视图使用分片显示一个巨大的可滚动区域，你可以使用 [CATileLayer](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/cl/CALayer) 类返回给视图。
 
-[layerClass](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/layerClass) 方法的实现应该只是简单的创建期望的 Class 对象并且返回它。例如，视图使用分片的方式将会使用下面的代码重写这个方法：
+[layerClass](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/layerClass) 方法的实现应该只是简单的创建想要的类对象并且返回它。例如，视图使用分片的方式将会使用下面的代码重写这个方法：
 
 ```
 + (Class)layerClass
@@ -341,14 +343,14 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 
 ```
 
-每一个视图调用 layerClass 方法时间都早于它的初始化处理并且使用返回的类创建它的层对象。除此之外，视图总会将自己分配为层对象的委托。在这一点上，视图拥有的层和视图与层之间的关系必须不改变。你也必须不能分配同样的视图作为其他层对象的委托。更改所有者关系或视图的委托关系将导致绘制问题和应用程序出现不可预料的崩溃。
+每一个视图调用它的 layerClass 方法的时间都比它的初始化处理更早并将已返回的类用于创建它的层对象。除此之外，视图总会将它自己分配为它的层对象的委托。在这一点上，视图拥有它的层并且视图与层之间的关系必须不改变。你也必须不能分配同样的视图作为其他层对象的委托。更改所有者关系或视图的委托关系将导致绘制问题和应用程序出现不可预料的崩溃。
 
-更多关于核型动画提供的不同类型的层对象，见 [*Core Animation Reference Collection*](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/CoreAnimation_framework/index.html#//apple_ref/doc/uid/TP40004513)。
+更多关于核心动画效果提供的不同类型的层对象的信息，见 [*Core Animation Reference Collection*](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/CoreAnimation_framework/index.html#//apple_ref/doc/uid/TP40004513)。
 
 ###在视图中嵌入层对象
-如果你打算主要与层对象工作而不是与视图工作，你可以按需要把自定义层对象合并到你的视图层次结构中。自定义层对象是 [CALayer](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/cl/CALayer) 的实例它不属于视图拥有。通常使用编程方式创建自定义层然后使用核心动画效果程序合并它们。自定义层不接收事件和不参与响应者队列但会绘制它们并且响应它们的父视图的尺寸更改或层根据核心动画效果规则的尺寸更改。
+如果你主要打算与层对象工作而不是与视图，你可以按需要把自定义层对象合并到你的视图层次结构中。自定义层对象是 [CALayer](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CALayer_class/index.html#//apple_ref/occ/cl/CALayer) 类的一个实例它不被视图拥有。通常使用编程方式创建自定义层然后使用核心动画例程合并它们。自定义层不接收事件不参与响应者队列但会绘制它们自己和响应它们的父视图尺寸更改或层根据核心动画效果规则分层。
 
-清单 3-3 展示了在一个视图控制器的 viewDidLoad 方法中创建自定义层对象并且添加它到它的根视图的例子。这个层对象被用作用动画显示静态图片。除了添加层到视图本身外，你也可以添加它到视图的底层 (underlying layer)。
+清单 3-3 的例子从视图控制器的 viewDidLoad 方法创建一个自定义层对象并添加它到它的根视图中。这个层对象被用作以动画方式显示静态图片。除了添加层到视图本身外，你也可以添加它到视图底层的层 (underlying layer)。
 
 **清单 3-3** 添加自定义层到视图
 
@@ -382,7 +384,7 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 
 ```
 
-你可以安排任意数量的子层并安排它们到子层的层次结构，如果你想的话。然而在某些时候，这些层必须被绑定到视图的层对象中。
+你可以添加任意数量的子层并安排它们到子层层次结构，如果你想的话。然而在某些时候，这些层必须被附加到视图的层对象中。
 
 关于如何与这些层直接工作，见 [*Core Animation Programming Guide*](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/CoreAnimation_guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40004514)。
 
