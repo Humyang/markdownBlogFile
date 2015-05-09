@@ -2,11 +2,10 @@ layout: [post]
 title: "iOS 笔记 《View Programming Guide for iOS：Windows》"
 date: 2015-05-04 16:04:30
 tags: 
-- iOS
+- 记录
 categories: 
-- iOS 开发
-- 翻译
-id: "iOS-Note-View-Programming-Guide-for-iOS-Windows"
+- 记录
+id: "useGithub"
 
 ---
 使用 github 桌面版本的记录
@@ -17,6 +16,7 @@ id: "iOS-Note-View-Programming-Guide-for-iOS-Windows"
 
 
 **图 1-1 和 图1-2** 切换分支后文件的变化
+
 ![](useGithub/1-1.png)
 
 ![](useGithub/1-2.png)
@@ -26,7 +26,47 @@ Github 主要以主分支为主，当分支 A 的操作提交合并请求到 Git
 
 下面为这篇博文创建一个分支：useGithub，然后测试修改一些内容，提交合并到主分支的请求，然后查看主分支的变化。
 
-1. 创建分支 useGithub。如图 1-3。
+1. 创建分支 useGithub，然后将分支 public 到 Github 中。如图 1-3。
 2. 切换到该分支，因为该分支是依据主分支创建的，所以与主分支的内容一样。就连主分支没提交的内容也是一样的，这是因为实在相同的 PC 中。如图 1-4。
 3. 切换回主分支，发现没提交的内容都消失了，Github 果然神奇。如图 1-5。
-4. 
+4. 切换回 useGithub 分支，提交修改的内容，然后发出合并请求。如图 1-6 和 图 1-7。(根据以前看过的资料猜想：如果不同的人在不同的 PC 修改了这个分支，并且都提交了合并请求，那么会造成冲突，需要两人协商解决。)
+5. 进入 Github 的项目主页,处理分支的合并请求。如图 1-8 和 图 1-9。
+6. 合并完成后返回主分支，发现主分支内容跟第三步时一样。点击右上角的 sync 与 Github 上的主分支同步后内容实现了想要的效果。如图 1-10 和 图1-11。
+7. 使用有自动保存功能的软件时要注意切换分支时的影响，避免文件在每个分支都有保存。
+
+图 1-3 创建分支
+
+![](useGithub/1-3.png)
+
+图 1-4 查看分支
+
+![](useGithub/1-4.png)
+
+图 1-5 查看主分支
+
+![](useGithub/1-5.png)
+
+图 1-6 提交修改
+
+![](useGithub/1-6.png)
+
+图 1-7 提交合并请求
+
+![](useGithub/1-7.png)
+
+图 1-8 查看合并请求
+
+![](useGithub/1-8.png)
+
+图 1-9 处理合并请求
+
+![](useGithub/1-9.png)
+
+图 1-10 主分支同步前
+
+![](useGithub/1-10.png)
+
+
+图 1-11 主分支同步后
+
+![](useGithub/1-11.png)
