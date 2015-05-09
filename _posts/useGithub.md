@@ -1,6 +1,6 @@
 layout: [post]
-title: "iOS 笔记 《View Programming Guide for iOS：Windows》"
-date: 2015-05-04 16:04:30
+title: "Github 使用笔记"
+date: 2015-05-09 16:04:30
 tags: 
 - 记录
 categories: 
@@ -8,7 +8,10 @@ categories:
 id: "useGithub"
 
 ---
-使用 github 桌面版本的记录
+
+记录 Github 的使用
+
+<!-- more -->
 
 #分支
 
