@@ -2,9 +2,10 @@ layout: [post]
 title: "Github 使用笔记"
 date: 2015-05-09 16:04:30
 tags: 
-- 记录
+- Git
+- 笔记
 categories: 
-- 记录
+- Git
 id: "useGithub"
 
 ---
