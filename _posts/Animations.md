@@ -278,12 +278,141 @@ setAnimationDidStopSelector: 选择器方法有一个额外的参数－一个布
 
 ###更改视图的子视图
 
+更改视图的子视图使你可以视图适度的修改。例如，你可以添加或移除视图切换父视图的两个不同状态之间。动画效果完成时，显示的是同样的视图但它的内容是不同的。
 
-###替换视图为不同视图
+在 iOS 4 和之后，使用 [transitionWithView:duration:options:animations:completion:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/transitionWithView:duration:options:animations:completion:) 方法开始视图的过渡动画效果。在动画效果块中传递这个方法，只会更改正常的动画与显示，隐藏，添加，或移除子视图相关联的。这个设置的限制动画使视图可以创建动画前和动画后的视图快照版本和在两个图像之间动画，这样更高效。如果你需要动画其他更改，当调用其他方法时你可以包含 [UIVIewAnimationOptionAllowAnimatedContent](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewAnimationOptionAllowAnimatedContent) 选项。包含这个选项防止视图创建快照并直接动画所有更改。
 
-##将多种动画效果链接到一起
+清单 4-6 例子说明如何使用过度动画效果使它看起来像已经添加一个新的文本输入页面。在这个例子中，主视图包含两个嵌入式文本视图。文本视图使用相同的配置，但一个视图可见时其他是总是隐藏。当用户触击按钮创建新页面时，这个方法切换两个视图的可见性，对用户显示一个新的空页面和一个空的文本视图准备接收文本。过渡效果完成之后，视图使用一个私有方法从旧页面保存文本并重置当前隐藏的文本视图使它可以稍后重用。视图然后整理它的指针当用户仍需要其他新页面时它可以做同样的事情。
 
-##将视图和层更改一起动画
+**清单 4-6**将已存在的文本视图交换为空文本视图
+
+```
+- (IBAction)displayNewPage:(id)sender
+{
+    [UIView transitionWithView:self.view
+        duration:1.0
+        options:UIViewAnimationOptionTransitionCurlUp
+        animations:^{
+            currentTextView.hidden = YES;
+            swapTextView.hidden = NO;
+        }
+        completion:^(BOOL finished){
+            // Save the old text and then swap the views.
+            [self saveNotes:temp];
+ 
+            UIView*    temp = currentTextView;
+            currentTextView = swapTextView;
+            swapTextView = temp;
+        }];
+}
+
+```
+
+如果你需要在 iOS 3.2 或更早执行视图过渡效果，你可以使用 [setAnimationTransition:forView:cache:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/setAnimationTransition:forView:cache:) 方法为转换效果指定参数。你传递给这个方法的视图与传递给 transitionWithView:duration:options:animations:completion: 方法的第一个参数是相同一个。清单 4-7 显示你所需要创建的动画效果块的基础结构。注意实现完整的块在清单 4-6 中显示，你将需要配置一个动画效果委托与未停止的处理，在 [Configuring an Animation Delegate](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW8) 中描述。
+
+**清单 4-7**使用 begin/commit 方法更改子视图
+
+```
+    [UIView beginAnimations:@"ToggleSiblings" context:nil];
+    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
+    [UIView setAnimationDuration:1.0];
+ 
+    // Make your changes
+ 
+    [UIView commitAnimations];
+
+
+
+```
+
+
+###将视图替换成不同视图
+有时候你想界面发生显著变化可以使用替换视图。因为这个技术只交换视图 (不是视图控制器)，你负责适当的设计你的应用程序的控制器对象。这个技术使用一些标准的过渡效果用简单的方式呈现新的视图。
+
+在 iOS 4 和之后，使用 [transitionFromView:toView:duration:options:completion:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/transitionFromView:toView:duration:options:completion:) 方法使两个视图之间过渡。这个方法实际上从你的视图层次结构移除第一个视图然后插入其他的，因此如果你想保持第一个视图你应该确认已有对它的引用。如果你想使用隐藏视图替代从视图层次结构移除它们，传入 [UIViewAnimationOptionShowHideTransitionViews](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/c/econst/UIViewAnimationOptionShowHideTransitionViews) 键作为选项之一。
+
+清单 4-8 的代码用作在两个被单个视图控制器管理的主视图之间交换。在这个例子中视图控制器的根视图总是显示两个子视图中的一个 (primaryView 或 secondaryView)。每个视图都呈现同样的内容但都以不同的方式。视图控制器使用成员变量 displayingPrimary (一个布尔值) 追踪视图在给定时间内是否显示。根据视图是否显示更改翻转方向。
+
+**清单 4-8**在视图控制器中切换两个视图之间
+
+```
+
+- (IBAction)toggleMainViews:(id)sender {
+    [UIView transitionFromView:(displayingPrimary ? primaryView : secondaryView)
+        toView:(displayingPrimary ? secondaryView : primaryView)
+        duration:1.0
+        options:(displayingPrimary ? UIViewAnimationOptionTransitionFlipFromRight :
+                    UIViewAnimationOptionTransitionFlipFromLeft)
+        completion:^(BOOL finished) {
+            if (finished) {
+                displayingPrimary = !displayingPrimary;
+            }
+    }];
+}
+
+```
+
+>**说明：**除了换出视图外，你的视图控制器代码还需要管理主视图和次视图的读取和卸载。关于如何使用视通控制器加载和卸载视图，见 [*View Controller Programming Guide for iOS*](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457)。
+
+
+##连结多个动画效果到一起
+UIView 的动画效果接口提供连结单个动画效果块的支持使它们能按顺序执行代替同时执行。连结动画效果块的处理取决于你是使用基于块的动画效果方法或 begin/commit 方法：
+
+- 对使用基于块的动画效果，使用 [animateWithDuration:animations:completion:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/animateWithDuration:animations:completion:) 和[animateWithDuration:delay:options:animations:completion:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/animateWithDuration:delay:options:animations:completion:) 方法提供的完成处理执行任意后续动画效果。
+- 对使用 begin/commit 动画效果，为动画效果 对动画效果分配一个委托对象和一个 did-stop 选择器。关于如何分配委托对象到你的动画效果中，见 [Configuring an Animation Delegate](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW8)。
+
+一个替代连结多个动画效果到一起的方式是使用嵌套动画效果设置不同的延迟系数使得在不同时间开始动画效果。更多关于如何嵌套动画效果的信息，见 [Nesting Animation Blocks](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/AnimatingViews/AnimatingViews.html#//apple_ref/doc/uid/TP40009503-CH6-SW11)。
+
+##一起更改视图和层的动画
+
+应用程序可以按需要自由的混合基于视图和基于层的动画效果代码但动画效果参数的配置处理取决于谁拥有该层。更改视图拥有的层等于更改视图它自己，任何你对层的属性应用的动画效果都遵从当前基于视图的动画效果块的动画效果参数。对于你自己创建的层这说法不成立。自定义层对象基于视图的动画效果块参数并使用默认的核心动画效果参数作为替代。
+
+如果你想为你创建的层自定义动画效果参数，你必须直接使用 Core Animation。通常，使用 Core Animation 制作层动画涉及到创建 [CABasicAnimation](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CABasicAnimation_class/index.html#//apple_ref/occ/cl/CABasicAnimation) 对象或 [CAAnimation](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CAAnimation_class/index.html#//apple_ref/occ/cl/CAAnimation) 的具体子类。然后添加动画效果到相应的层。你可以从基于视图的动画效果块的外部或内部应用这个动画效果。
+
+清单 4-9 显示的一个在同一时间修改视图和自定义层的动画效果。这个例子中的视图在它的边界的中心包含一个自定义的 CALayer 对象。这个动画选过以逆时针旋转视图而以顺时针旋转层。因为是以相反方向旋转，层保存相对屏幕的原始方向并且不会出现明显旋转。这个例子主要演示如何混合视图和层的动画效果。这个类型的混合不应该用在需要精确定时的情景下。
+
+**清单 4-9** 混合视图的层动画效果
+
+```
+
+[UIView animateWithDuration:1.0
+    delay:0.0
+    options: UIViewAnimationOptionCurveLinear
+    animations:^{
+        // Animate the first half of the view rotation.
+        CGAffineTransform  xform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-180));
+        backingView.transform = xform;
+ 
+        // Rotate the embedded CALayer in the opposite direction.
+        CABasicAnimation*    layerAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+        layerAnimation.duration = 2.0;
+        layerAnimation.beginTime = 0; //CACurrentMediaTime() + 1;
+        layerAnimation.valueFunction = [CAValueFunction functionWithName:kCAValueFunctionRotateZ];
+        layerAnimation.timingFunction = [CAMediaTimingFunction
+                        functionWithName:kCAMediaTimingFunctionLinear];
+        layerAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+        layerAnimation.toValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(360.0)];
+        layerAnimation.byValue = [NSNumber numberWithFloat:DEGREES_TO_RADIANS(180.0)];
+        [manLayer addAnimation:layerAnimation forKey:@"layerAnimation"];
+    }
+    completion:^(BOOL finished){
+        // Now do the second half of the view rotation.
+        [UIView animateWithDuration:1.0
+             delay: 0.0
+             options: UIViewAnimationOptionCurveLinear
+             animations:^{
+                 CGAffineTransform  xform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(-359));
+                 backingView.transform = xform;
+             }
+             completion:^(BOOL finished){
+                 backingView.transform = CGAffineTransformIdentity;
+         }];
+}];
+
+```
+
+>**说明：**在清单 4-9 中，你也可以在基于视图的动画效果块外部创建和应用 CABasicAnimation 对象实现同样的结果。所有的动画效果最终依靠 Core Animatino 为它们执行。因此，如果它们提交的时间大约相同，它们会一起运行。
+
 
 ---
 
