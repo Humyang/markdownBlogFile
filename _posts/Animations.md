@@ -1,10 +1,16 @@
-[原文地址](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009503-CH1-SW2)
+layout: [post]
+title: "iOS 笔记 《View Programming Guide for iOS：Animations》"
+date: 2015-05-12 23:29:32
+tags: 
+- iOS
+categories: 
+- iOS 开发
+- 翻译
+id: "iOS-Note-View-Programming-Guide-for-iOS-Animations"
 
-
+---
 
 记录关于学习过的 iOS 文档
-
-[toc]
 
 ---
 
@@ -419,12 +425,12 @@ UIView 动画效果接口提供连结单个动画效果块的支持使它们能�
 
 系列文章
 
-[*iOS 笔记 《View Programming Guide for iOS：Introduction》*](http://blog.csdn.net/yangxionggui/article/details/45178793) 
+[*iOS 笔记 《View Programming Guide for iOS：Introduction》*](../iOS-Note-View-Programming-Guide-for-iOS-Introduction) 
 
-[*iOS 笔记 《View Programming Guide for iOS：View and Window Architecture》*](http://blog.csdn.net/yangxionggui/article/details/45179765)
+[*iOS 笔记 《View Programming Guide for iOS：View and Window Architecture》*](../iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture) 
 
-[*iOS 笔记 《View Programming Guide for iOS：Windows》*](http://blog.csdn.net/yangxionggui/article/details/45179821)
+[*iOS 笔记 《View Programming Guide for iOS：Windows》*](../iOS-Note-View-Programming-Guide-for-iOS-Windows) 
 
-[*iOS 笔记 《View Programming Guide for iOS：Views》* ](http://blog.csdn.net/yangxionggui/article/details/45179955)
+[*iOS 笔记 《View Programming Guide for iOS：Views》* ](../iOS-Note-View-Programming-Guide-for-iOS-Views) 
 
 *iOS 笔记 《View Programming Guide for iOS：Animations》*

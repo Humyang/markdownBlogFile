@@ -69,8 +69,12 @@ id: "iOS-Note-View-Programming-Guide-for-iOS-Introduction"
 系列文章
 
 *iOS 笔记 《View Programming Guide for iOS：Introduction》*
+
 [*iOS 笔记 《View Programming Guide for iOS：View and Window Architecture》*](../iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture) 
+
 [*iOS 笔记 《View Programming Guide for iOS：Windows》*](../iOS-Note-View-Programming-Guide-for-iOS-Windows) 
+
 [*iOS 笔记 《View Programming Guide for iOS：Views》* ](../iOS-Note-View-Programming-Guide-for-iOS-Views) 
-[*iOS 笔记 《View Programming Guide for iOS：Animations》*]() 
+
+[*iOS 笔记 《View Programming Guide for iOS：Animations》*](../iOS-Note-View-Programming-Guide-for-iOS-Animations) 
 

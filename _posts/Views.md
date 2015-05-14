@@ -529,4 +529,4 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 
 *iOS 笔记 《View Programming Guide for iOS：Views》* 
 
-[*iOS 笔记 《View Programming Guide for iOS：Animations》*]() 
+[*iOS 笔记 《View Programming Guide for iOS：Animations》*](../iOS-Note-View-Programming-Guide-for-iOS-Animations) 

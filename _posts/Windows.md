@@ -241,5 +241,5 @@ UIWindowDidBecomeKeyNotification 和 UIWindowDidResignKeyNotification 通知帮�
 
 [*iOS 笔记 《View Programming Guide for iOS：Views》* ](../iOS-Note-View-Programming-Guide-for-iOS-Views) 
 
-[*iOS 笔记 《View Programming Guide for iOS：Animations》*]() 
+[*iOS 笔记 《View Programming Guide for iOS：Animations》*](../iOS-Note-View-Programming-Guide-for-iOS-Animations) 
 
