@@ -12,6 +12,10 @@ id: "iOS-Note-View-Programming-Guide-for-iOS-Animations"
 
 记录关于学习过的 iOS 文档
 
+<!-- more -->
+
+[原文地址](https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/ViewPG_iPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009503-CH1-SW2)
+
 ---
 
 #动画效果
