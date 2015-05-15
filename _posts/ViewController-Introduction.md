@@ -19,9 +19,6 @@ iOS 视图控制器编程指南：介绍
 [原文地址](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457-CH1-SW1)
 
 
-
-[toc]
-
 ---
 
 # 关于视图控制器
@@ -30,7 +27,7 @@ iOS 视图控制器编程指南：介绍
 
 iOS 提供了许多内置的视图控制器类对标准用户界面的支持，例如导航栏和标签栏。作为开发应用程序的一部分，你也可以实现一个或多个自定义控制器显示特定的内容。
 
-![](./navigation_interface_2x.jpg)
+![](./navigation_interface_2x.png)
 
 ## 一览
 视图控制器在 Model-View-Controller (MVC) 设计模式中是传统的控制器对象，但它们做得更多。视图控制器对所有 iOS 应用程序提供许多常用行为。对于某些行为，基础类提供解决方案的一部分，在你的视图控制器子类实现自定义代码完成剩余部分。例如，当用户旋转设备时，标准的实现过程会尝试旋转用户界面；但是，你的子类决定用户界面是否应该旋转，如果是，应该对视图配置如何应对新方向的更改。因此，结构化基础类和与具体子类的组合使你轻松的自定义应用程序的行为同时符合平台设计准则。
