@@ -1,5 +1,5 @@
 layout: [post]
-title: "iOS 笔记 《View Controller Programming Guide for iOS：Introduction》"
+title: "iOS 笔记 《View Controller Programming Guide for iOS：View Controller Basics》"
 date: 2015-05-14 08:34:26
 tags: 
 - iOS
@@ -12,6 +12,9 @@ id: "VCP1"
 
 记录关于学习过的 iOS 文档
 
+iOS 视图控制器编程指南：视图控制器基础
+
+
 <!-- more -->
 
 [原文地址](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457-CH1-SW1)
@@ -19,9 +22,9 @@ id: "VCP1"
 ---
 
 # 视图控制器基础
-运行在 iOS 设备的应用程序显示内容时会受到屏幕空间量的限制因此必须有创造性的为用户呈现信息。有大量信息需要显示的应用程序因此只能显示开始的一部分，然后隐藏的额外内容在用户与应用程序交互时显示。视图控制器对象提供基础设施管理内容和协调内容的显示和隐藏。不同的视图控制类控制用户界面分离的不同部分，由你来拆分用户界面的实现过程为更小的更易管理的单元。
+运行在 iOS 设备的应用程序显示内容时会受到屏幕空间量的限制因此必须有创造性的为用户呈现信息。有大量信息需要显示的应用程序因此只能显示从显示一部份内容开始，然后在用户与应用程序交互时隐藏或显示的额外内容。视图控制器对象提供基础设施管理内容和协调它的显示和隐藏。不同的视图控制类控制用户界面独立的部分，由你将用户界面的实现过程拆分为更小的更易管理的单元。
 
-在你可以在应用程序使用视图控制器之前，你需要对主要的类在 iOS 应用程序用来显示什么内容有基本的了解，包括窗口和视图。任何视图控制器的实现过程的关键部分是管理使用视图显示它的内容。不管怎样，管理视图不仅仅对视图控制器工作。大多数视图控制器在需要过渡时会跟其它视图控制器通信和协调。因为视图控制器管理着许多连接，无论是向内看的视图和关联的对象还是向外看的其它控制器，弄清楚对象之间的连接有时候是很困难的。作为替代，使用界面构造器创建 storyboards。Storyboards 轻松的使你的应用程序之间的关系可视化和大大简化在运行时初始化对象需要的功夫。
+在你可以在你的应用程序使用视图控制器之前，你需要对在 iOS 应用程序主要用来显示内容的类有基本的了解，包括窗口和视图。任何视图控制器实现过程的关键部分是管理显示它的内容的视图。不管怎样，管理视图不是视图控制器唯一执行的工作。大多数视图控制器在产生过渡时会跟其它视图控制器通信和协调。因为视图控制器管理着许多连接，无论是向内看视图和关联的对象还是向外看其它控制器，明白对象之间的连接有时候是很困难的。作为替代，使用界面构造器创建 storyboards。Storyboards 使应用程序之间的关系可视化和极大简化在运行时初始化对象所花费的功夫。
 
 
 ## 屏幕，窗口，和视图创建视觉界面
@@ -292,7 +295,7 @@ id: "VCP1"
 
 	segue 共享了常用的编程模型。在这个模型中，目标控制器是通过 iOS 自动实例化然后源视图控制器被调用来配置它。这个行为适配的控制流模式在 [Control Flow Represents Overall Coordination Betweent Content Controllers](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/AboutViewControllers/AboutViewControllers.html#//apple_ref/doc/uid/TP40007457-CH112-SW27) 中描述。
 	
-你也可以创建视图控制器和保存在同一个场景内的对象之间的连接。outlets 和 action 让你仔细的定义视图控制器和与它关联的对象之间的关系。连接通常不能在 storyboards 见到它自己但可以在界面构造器的连接
+你也可以创建视图控制器和保存在同一个场景内的对象之间的连接。outlets 和 action 让你仔细的定义视图控制器和与它关联的对象之间的关系。连接通常不能在 storyboards 见到它自己但可以在界面构造器的 Connections Inspector 浏览。
 
 ---
 
