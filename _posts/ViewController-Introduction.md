@@ -10,14 +10,13 @@ id: "VCP0"
 
 ---
 
-记录关于学习过的 iOS 文档
-
 iOS 视图控制器编程指南：介绍
 
 <!-- more -->
 
 [原文地址](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457-CH1-SW1)
 
+记录关于学习过的 iOS 文档
 
 ---
 
@@ -106,10 +105,9 @@ iOS 提供许多类型的内置容器视图控制器你可以用来组织你的�
 
 *iOS 笔记 《View Controller Programming Guide for iOS：Introduction》*
 
+[*iOS 笔记 《View Controller Programming Guide for iOS：View Controller Basics》*](../VCP1) 
 
 ---
-
-[*iOS 笔记 《View Controller Programming Guide for iOS：View Controller Basics》*](../VCP1) 
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*](../VCP2) 
 
