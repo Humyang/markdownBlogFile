@@ -1,6 +1,6 @@
 layout: [post]
 title: "iOS 笔记 《View Controller Programming Guide for iOS：View Controller Basics》"
-date: 2015-05-14 08:34:26
+date: 2015-05-22 14:36:26
 tags: 
 - iOS
 categories: 
