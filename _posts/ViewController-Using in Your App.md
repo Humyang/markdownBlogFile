@@ -1,4 +1,4 @@
-﻿layout: [post]
+layout: [post]
 title: "iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》"
 date: 2015-05-22 20:43:26
 tags: 
@@ -22,8 +22,29 @@ iOS 视图控制器编程指南：在应用程序中使用视图控制器
 
 ---
 
+# 在应用程序中使用视图控制器
+
+
+## 在 Storyboards 与视图控制器工作
+
+### 主 Storyboard 实例化你的应用程序的用户界面
+
+### Segues 自动实例化目标视图控制器
+
+#### 编程方式触发 Segue
+
+### 编程方式实例化 Stroyboard 的视图控制器
+
+### 过渡到新的 Storyboards 需要用编程途径
+
+### 容器自动实例化它们的子级
+
+## 实例化非故事板的视图控制
+
+## 使用编程方式显示视图控制器的内容
 
 ---
+
 系列文章
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Introduction》*](../VCP0) 
