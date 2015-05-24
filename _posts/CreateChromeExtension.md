@@ -1,6 +1,6 @@
 layout: [post]
 title: "创建 Chrome 拓展"
-date: 2015-05-23 20:43:26
+date: 2015-05-24 12:45:26
 tags: 
 - 前端
 categories: 
@@ -10,9 +10,10 @@ id: "CreateChromeExtension"
 
 ---
 
-# 创建 Chrome 拓展
 
 因为最近在翻译一些文章，文章标题的 H1~H6 标签有时候挺难分清楚大小，就想利用 jQuery 区分它们，但有的网站没使用 jQuery。所以就打算写一个插件解决类似的问题。
+
+<!-- more -->
 
 ## 入门例子
 
