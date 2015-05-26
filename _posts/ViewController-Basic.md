@@ -313,6 +313,8 @@ iOS 视图控制器编程指南：视图控制器基础
 
 *iOS 笔记 《View Controller Programming Guide for iOS：View Controller Basics》*
 
+[*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*](../VCP2) 
+
 ---
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*](../VCP2) 

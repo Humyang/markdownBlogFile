@@ -107,9 +107,11 @@ iOS 提供许多类型的内置容器视图控制器你可以用来组织你的�
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：View Controller Basics》*](../VCP1) 
 
+[*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*](../VCP2) 
+
 ---
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*](../VCP2) 
+
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》*](../VCP3) 
 

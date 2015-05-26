@@ -1,6 +1,6 @@
 layout: [post]
 title: "iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》"
-date: 2015-05-22 20:43:26
+date: 2015-05-26 23:51:26
 tags: 
 - iOS
 categories: 
@@ -232,6 +232,9 @@ segue 只连接保存在同一个故事板的场景。需要从另一个故事�
 [*iOS 笔记 《View Controller Programming Guide for iOS：View Controller Basics》*](../VCP1) 
 
 *iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*
+
+---
+
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》*](../VCP3) 
 
