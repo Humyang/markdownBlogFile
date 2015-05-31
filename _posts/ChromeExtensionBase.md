@@ -96,6 +96,7 @@ manifest 文件，名为 `manifest.json`，提供有关拓展的信息，例如�
     "default_popup": "popup.html"
   }
 }
+
 ```
 
 更多细节，见 [Manifest Files](https://developer.chrome.com/extensions/manifest)。
@@ -164,6 +165,7 @@ content script 不完全与它的父拓展切断关系，content script 可以�
 
 如果 `query()` 是同步的，你可以写这样的代码：
 
+
 ```
 
 //THIS CODE DOESN'T WORK
@@ -171,7 +173,7 @@ var tab = chrome.tabs.query({'active': true}); //WRONG!!!
 chrome.tabs.update(tab.id, {url:newUrl});
 someOtherFunction();
 
-``` 
+```
 
 但这是错误的因为 `query()` 是异步的。它直接返回不会等待工作完成，它甚至不会返回值 (尽管一些异步方法可以)。你可以从方法的签名中的 *callback* 参数知道 `query()` 是异步的。
 
@@ -180,12 +182,15 @@ someOtherFunction();
 
 要修复上面的代码，你必须使用回调参数。下面的代码展示如何使用回调方法从 `query()` 获取结果 (有一个名为 `tabs` 的参数) 并调用 `update()`。
 
+
 ```
+
 //THIS CODE WORKS
 chrome.tabs.query({'active': true}, function(tabs) {
   chrome.tabs.update(tabs[0].id, {url: newUrl});
 });
 someOtherFunction();
+
 
 ```
 
@@ -209,9 +214,12 @@ HTML 页面与拓展通常都需要通信。因为所有拓展的页面在同一
 
 > **经验之谈：**如果数据是说明用户访问了什么网页，或完成了什么操作的信息，那么不要在匿名窗口保存它们。
 
+
 要判断窗口是否匿名模式，检测 [tabs.Tab](https://developer.chrome.com/extensions/tabs#type-Tab) 的 `incognito` 属性或 [windows.Window](https://developer.chrome.com/extensions/windows#type-Window) 对象。例如：
 
+
 ```
+
 function saveTabData(tab, data) {
   if (tab.incognito) {
     chrome.runtime.getBackgroundPage(function(bgPage) {
@@ -221,6 +229,7 @@ function saveTabData(tab, data) {
     localStorage[tab.url] = data;  // OK to store data
   }
 }
+
 
 ```
 
