@@ -195,7 +195,7 @@ iOS 视图控制器编程指南：创建自定义内容视图控制器
 * **它的视图如何显示在屏幕？** 它会自动安装为窗口的根视图控制器。
 * **它如何与其他视图控制器合作？** 它会实例化其它视图控制器呈现游戏画面。当游戏结束，其它视图控制器发送消息到标题画面控制器通知游戏已经结束。标题画面控制器然后清退其它视图控制器
 
-#### 可选的设计考虑因素
+#### 选择性设计策略
 
 默认回答是假设没有用户数据需要显示。但一些游戏包含玩家数据用来配置视图或控件。例如：
 
@@ -203,39 +203,116 @@ iOS 视图控制器编程指南：创建自定义内容视图控制器
 * 你可能想基于设备是否连接到游戏中心决定启用或禁用按钮。
 * 你可能想基于应用程序内置的购买项用户是否购买决定启用或禁用按钮。
 
-当这些额外的项添加到设计时，视图控制器呈现出更传统的功能。它可能从应用程序委托接收数据对象或数据控制器使它可以查询和更新必要的状态。或者，作为窗口的根视图控制器，你可以直接在标题画面控制器简单的实现这些行为。
+当这些额外的项添加到设计时，视图控制器呈现出更传统的功能。它可能从应用程序委托接收数据对象或数据控制器使它可以查询和更新必要的状态。或者，作为窗口的根视图控制器，你可以直接在标题画面控制器简单的实现这些行为。实际的设计依赖于你需要多灵活的代码完成。
 
 ### 例子：主视图控制器
 
+
+
 #### 任务说明
+
+导航视图控制器的初始视图控制器，用作显示应用程序的可用数据对象名单。
 
 #### 描述
 
+
+主视图控制器是基于导航的应用程序非常常见一部分。例如，*Your Second iOS App：Storyboards* 使用主视图控制器显示观鸟名单。当用户从名单中选择时，主视图控制器推出一个新的详细控制器到屏幕中。
+
+因为这个视图控制器显示产品清单，所有它使用子类 [UITableViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewController_Class/index.html#//apple_ref/occ/cl/UITableViewController) 代替 [UIViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/cl/UIViewController)。
+ 
+
 #### 设计
 
-#### 替代的设计考虑
+* **是否使用故事板实现视图控制器？** 是。
+* **什么时候实例化？** 作为导航视图控制器的根视图，它与父辈同时实例化。
+* **它要显示什么数据？** 高级视图的应用程序数据。它实现了应用程序委托属性用作对它提供数据。例如，观鸟应用程序提供自定义数据控制器对象给主视图控制器。
+* **它执行什么任务？** 它实现了一个添加按钮允许用户创建新纪录。
+* **这个视图如何显示在屏幕？** 它是导航控制器的子级。
+* **它如何与其他视图控制器合作？** 当用户点击列表中的项时，它使用 push segue 显示一个细节控制器。当用户点击添加按钮，它使用 modeal segue 呈现编辑新纪录的新视图控制器。它从模态视图控制器接收数据并发送这个数据到数据控制器创建新的观鸟项。
+
+####  选择性设计策略
+
+导航控制器和初始视图控制器被用在构建 iPhone 应用程序。当为 iPad 设计同样的应用程序时，主视图控制器可以用分割视图控制器的子级作为替代。大部分其它设计策略保持不变。
 
 ### 例子：细节视图控制器
 
+
+
 #### 任务说明
+
+视图控制器将它推送到导航堆栈，为在主视图控制器列表选择的项显示细节。
 
 #### 描述
 
+细节视图控制器呈现比主视图控制器显示的清单项更详细的视图。由于与主视图控制器关联，列表内会出现导航栏界面。当用户完成项的查看后它们可以点击导航栏中的按钮返回主视图控制器。
+
+*Your Second iOS App:Storyboards* 使用 [UITableViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewController_Class/index.html#//apple_ref/occ/cl/UITableViewController) 类实现细节视图。 它使用了静态表格行，每一行可以访问观鸟数据的一部分。静态表格视图是实现设计的很好的一种方式。
+
 #### 设计
 
-#### 替代的设计考虑
+* **是否使用故事板实现视图控制器？** 是。
+* **什么时候实例化？** 它通过主视图控制器的 push segue 实例化。
+* **它要显示什么数据？** 它显示的数据保存在自定义数据对象。它声明了对象属性，通过源视图控制器配置提供数据。
+* **它执行什么任务？** 它允许用户清退视图。
+* **这个视图如何显示在屏幕？** 它是导航控制器的子级。
+* **它如何与其他视图控制器合作？** 它从主视图控制器接收数据。
+
+
+#### 选择性设计策略
+
+导航控制器最常用于构建 iPhone 应用程序。当为 iPad 设计同样的应用程序时，建议使用分割视图控制器的子级替代细节视图控制器。大部分其它设计策略保持不变。
+
+如果你的应用程序需要自定义视图行为，它可以使用 [UIViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/cl/UIViewController) 的子类并实现属于它的视图层次结构。
+
 
 ### 例子：邮件撰写视图控制器
 
 #### 任务说明
 
+该视图控制器能让用户撰写和发送邮件
+
 #### 描述
+
+Mesage UI framework 提供了 [MFMailComposeViewController](https://developer.apple.com/library/ios/documentation/MessageUI/Reference/MFMailComposeViewController_class/index.html#//apple_ref/occ/cl/MFMailComposeViewController) 类。这个类能让用户撰写和发送邮件。这个控制器是非常有趣的因为它不仅可以显示了编辑数据，它还可以发送邮件。
+
+这个类的另一个有趣的设计选项是它能让应用程序提供邮件信息的初始配置。初始配置被呈现后，用户可以在发送邮件之前重写这些选项。
 
 #### 设计
 
-#### 替代的设计考虑
+
+* **是否使用故事板实现视图控制器？** 否。
+* **什么时候实例化？** 它通过编程方式实例化。
+* **它要显示什么数据？** 它显示邮件消息的各种部分，包括收件人列表，标题，附件，和邮件本身。这个类提供了属性能让其它控制器预配置邮件消息。
+* **它执行什么任务？** 它发送邮件。
+* **这个视图如何显示在屏幕？** 这个视图控制器通过另一个视图控制器呈现。
+* **它如何与其他视图控制器合作？** 它返回状态信息给它的委托。这个状态能让视图控制器知道邮件是否发送成功。
 
 ## 自定义内容视图控制器的实现过程清单
+
+任何你创建的自定义内容视图控制器，这里有几个你的视图控制器必须处理的任务：
+
+* 你必须配置视图为由你的视图控制器加载。<br /> 你的自定义类可以重写特定的方法管理它的视图层次机构如何加载和卸载。这些方法同样可以管理在同一个时间创建的其它资源。见 [Resouce Management in View Controllers](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/ViewLoadingandUnloading/ViewLoadingandUnloading.html#//apple_ref/doc/uid/TP40007457-CH10-SW1)。
+* 你必须决定你的视图控制器支持哪个设备方向，和如何应对设备方向的更改；见 [Supporting Multiple Interface Orientations](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/RespondingtoDeviceOrientationChanges/RespondingtoDeviceOrientationChanges.html#//apple_ref/doc/uid/TP40007457-CH7-SW1)。
+
+在你实现视图控制器时，你很容器发现你需要实现的动作方法或它的视图使用的 outlets。例如，如果视图层次结构包含表格，你可能会想保存表格的指针到一个 outlet 中能在以后访问。同样，如果你的视图层次结构包含按钮或其它控件，你可能想让这些控件调用视图控制器中的关联动作方法。当你在遍历你定义的视图控制器类的定义时，你会发现需要添加下面的项到你的视图控制器类中：
+
+* 声明属性 (定义属性的简短语法 @property) 指向包含数据的对象，将要通过相应的视图显示。
+* 暴露视图控制器自定义行为给其它视图控制器的共有方法和属性。
+* 指向视图层次结构中需要与视图控制器互动的视图的 Outlets。
+* 动作方法，执行视图层次结构中关联按钮或其它控件的任务
+
+
+> 
+**重要提示：**你的视图控制器类的使用者不需要知道你的视图控制器显示什么视图或视图可能触发什么动作。只要有可能，outlets 和 actions 都应该声明在类的实现文件的分类中。例如，如果你的类叫做 `MyViewController`，你可以通过添加以下的声明到 `MyViewController.m` 中实现分类：
+> 	
+	@interface MyViewController()
+	// Outlets and actions here.
+	@end
+	@implementation MyViewController
+	// Implementation of the privately declared category must go here.
+	@end
+> 当你声明没有名称的分类时，属性和 action 必须实现在同一个实现块中作为方法和属性在公开接口中声明。定义在私有分类的 outlets 和 actions 可以在界面构造器中见到，但不能被应用程序的其他类见到。这个特性让你能享受界面构造器的好处又不会暴露你的类的秘密。<br />如果另一个类需要访问你的视图控制器的功能，添加公有方法和属性作为访问这个功能的代替。
+	
 
 ---
 
@@ -273,6 +350,5 @@ iOS 视图控制器编程指南：创建自定义内容视图控制器
 [*iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Segues》*](../VCP13) 
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Container View Controllers》*](../VCP14)
-
 
 
