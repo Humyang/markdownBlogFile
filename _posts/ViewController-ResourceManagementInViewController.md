@@ -143,9 +143,71 @@ b.使用 [addSubview:](https://developer.apple.com/library/ios/documentation/UIK
 
 ## 高效管理内存
 
+当设计视图控制器和内存管理时，这里有两个问题需要考虑：
+
+* 如何高效分配内存
+* 何时与如何释放内存
+
+内存分配的一些方面严格的由你决定，类 [UIViewControllers](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/cl/UIViewController) 提供了一些常常与内存管理任务有联系的方法。表格 4-1 列出你在视图控制器中可能分配和释放内存的位置，和每个位置你应该怎什么的信息。
+
+任务  | 方法 | 讨论
+------------- | -------------
+通过你的视图控制器分配关键数据结构  | 初始化方法 | 你的自定义初始化方法(名字是 `init` 或其它) 总是负责把你的视图控制器对象放入一个已知状态。包含数据对象的分配确保正确运行。
+创建视图对象  | [loadView](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/loadView) | 只有打算以编程方式创建视图时才需要重写 `loadView` 方法，如果你使用故事板，视图自动从故事板文件加载。
+创建自定义对象  | 自定义属性和方法 | 尽管你可以自由使用其它设计，请考虑使用与 [loadView](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/loadView) 方法类似的模式。创建保存对象的属性和匹配的方法对它初始化。当属性被读取并且它的值是 nil 时，调用关联的加载方法。
+分配或加载数据显示在视图中  | viewDidLoad | 数据对象通常通过配置视图控制器的属性提供。所有视图控制器想创建的额外的对象应该通过重写 `viewDidLoad` 方法完成。当这个方法被调用的时候，视图对象是已存在并且是一个已知的良好状态。
+响应底内存通知  | [didReceiveMemoryWarning](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/didReceiveMemoryWarning) | 使用这个方法释放所有与视图控制器关联的非关键对象。在 iOS 6，你也可以使用这个方法释放对视图对象的引用。
+通过你的视图控制器释放关键数据结构  | [dealloc](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSObject_Class/index.html#//apple_ref/occ/instm/NSObject/dealloc) | 重写这个方法只需要执行视图控制器类清理的最后一步。保存在实例变量和属性中的对象会自动释放，你不需要明切的释放它们。
+
 ### iOS 6 和之后的版本，视图控制器在需要时卸载属于它的视图
 
+视图控制器的默认行为是在 view 属性第一次访问时加载它的视图层次结构并一直保持在内存中直到视图控制器处置它们。被视图使用绘制它们到屏幕上需要的内存可能相当的大，因此，当视图不与窗口关联时系统会自动释放这些昂贵的资源。大部分视图使用的剩余内存小到系统不会自动清除和重新创建视图层次结构。
+
+你可以明确的释放视图层次结构，如果你的应用程序必须要额外的内存。清单 4-3 重写 [didReceiveMemoryWarning]() 方法完成目的。首先，它调用父类的实现执行需要的默认行为。然后，它清除视图控制器的资源。最后，它测试视图控制器的视图是否在屏幕上。如果视图与窗口关联，那么它清除所有视图控制器对它的视图和子视图的强引用。如果视图保存的数据需要被创新创建，那么这个方法的实现过程应该在释放这些视图的引用之前保存数据。
+
+清单 4-3 释放视图控制器的视图不在屏幕上显示
+
+```
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Add code to clean up any of your own resources that are no longer necessary.
+    if ([self.view window] == nil)
+    {
+        // Add code to preserve data stored in the views that might be
+        // needed later.
+ 
+        // Add code to clean up other strong references to the view in
+        // the view hierarchy.
+        self.view = nil;
+}
+
+```
+
+[View](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instp/UIViewController/view) 属性下次被访问时，视图会如同第一次访问一样重新加载。
+
 ### iOS 5 和之前的版本，当内存过低时系统可能会卸载视图
+
+在早期版本的 iOS，当内存过低时系统自动尝试卸载视图控制器的视图。下面的步骤发生在卸载周期期间：
+
+1.应用程序从系统接收到低内存警告。
+
+2.每个视图控制器都调用它的 [didReceiveMemoryWarning](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instm/UIViewController/didReceiveMemoryWarning) 方法。如果你重写这个方法，你应该使用它释放你的视图控制器对象不长期需要的内存或对象。你必须在实现过程的某个位置调用 `super` 确保默认的实现过程运行。在 iOS 5 和之前，默认实现过程会尝试释放视图，在 iOS 6 和之后，默认实现过程会退出执行。
+
+3.如果视图不能安全的释放 (例如，它在屏幕上显示)，默认实现过程会退出执行。
+
+4.视图控制器调用它的 [viewWillUnload]() 方法。它的子类通常会重写这个方法当它需要在视图销毁之前保存视图的属性。
+
+5.设置它的 [view]() 属性为 `nil`。
+
+6.视图控制器调用它的 [viewDidUnload]() 方法。它的子类通常会重写这个方法释放对它这些视图的强引用。
+
+图 4-3 可视化的呈现视图控制器的卸载周期。
+
+**图 4-3** 从内存中卸载视图
+
+![](./unloading_a_view_controllers_view_2x.png)
 
 ---
 
