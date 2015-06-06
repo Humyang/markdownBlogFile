@@ -1,6 +1,6 @@
 layout: [post]
-title: "iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》"
-date: 2015-05-22 20:43:26
+title: "iOS 笔记 《View Controller Programming Guide for iOS：Resource Management View Controller》"
+date: 2015-06-07 03:48:20
 tags: 
 - iOS
 categories: 
@@ -213,7 +213,17 @@ b.使用 [addSubview:](https://developer.apple.com/library/ios/documentation/UIK
 
 ---
 
+[*iOS 笔记 《View Controller Programming Guide for iOS：Introduction》*](../VCP0) 
+
+[*iOS 笔记 《View Controller Programming Guide for iOS：View Controller Basics》*](../VCP1) 
+
+[*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*](../VCP2) 
+
+[*iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》*](../VCP3)
+
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
+
+---
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
 

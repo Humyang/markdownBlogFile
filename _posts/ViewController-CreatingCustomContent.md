@@ -1,6 +1,6 @@
 layout: [post]
 title: "iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》"
-date: 2015-05-22 20:43:26
+date: 2015-06-04 02:56:50
 tags: 
 - iOS
 categories: 
@@ -217,7 +217,7 @@ iOS 视图控制器编程指南：创建自定义内容视图控制器
 
 主视图控制器是基于导航的应用程序非常常用的部分。例如，*Your Second iOS App：Storyboards* 使用主视图控制器显示观鸟名单。当用户从名单中选择时，主视图控制器推出一个新的详细控制器到屏幕中。
 
-因为这个视图控制器显示项的列表，所有它使用子类 [UITableViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewController_Class/index.html#//apple_ref/occ/cl/UITableViewController) 代替 [UIViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/cl/UIViewController)。
+因为这个视图控制器显示项的列表，所以它使用子类 [UITableViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITableViewController_Class/index.html#//apple_ref/occ/cl/UITableViewController) 代替 [UIViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/cl/UIViewController)。
  
 
 #### 设计
@@ -324,9 +324,9 @@ Message UI framework 提供了 [MFMailComposeViewController](https://developer.a
 
 *iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》* 
 
----
-
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
+
+---
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
 
