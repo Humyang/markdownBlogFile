@@ -10,7 +10,7 @@ id: "VCP8"
 
 ---
 
-iOS 视图控制器编程指南：在响应者队列中使用视图控制器
+iOS 视图控制器编程指南：在响应链中使用视图控制器
 
 
 <!-- more -->
@@ -21,20 +21,20 @@ iOS 视图控制器编程指南：在响应者队列中使用视图控制器
 
 ---
 
-# 在响应者队列中使用视图控制器
+# 在响应链中使用视图控制器
 
-视图控制器是 [UIResponder](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIResponder_Class/index.html#//apple_ref/occ/cl/UIResponder) 类的后代因此它有处理各种事件的能力。当视图控制器不处理给定的事件时，它会传递事件给它的父视图，逐渐往视图层次结构的上方传递直到根视图。但是，如果队列中的视图由其他视图控制器管理，它会把事件传递给它的父视图之前传递给视图控制器对象。因此，视图控制器可以响应事件不用由它的视图处理。如果视图控制器不处理该事件，该事件通常会移到视图的父视图。
+视图控制器是 [UIResponder](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIResponder_Class/index.html#//apple_ref/occ/cl/UIResponder) 类的后代因此它有处理各种事件的能力。当视图不处理给定的事件时，它会传递事件给它的父视图，逐渐往视图层次结构的上方传递一直到根视图。不过，如果队列中的视图由视图控制器管理，它会把事件传递给它的父视图之前传递给视图控制器对象。因此，视图控制器可以响应它的不由它的视图处理的事件。如果视图控制器也不处理该事件，通常该事件会移动到视图的父视图。
 
-## 响应者队列定义事件如何传播给应用程序
+## 响应链定义事件如何被传播到应用程序
 
-图 7-1 演示视图层次结构内的事件流程。假设你有一个嵌入到一个屏幕大小尺寸的普通视图对象中的自定义视图，而普通视图对象又是由你的视图控制器管理。到达你的自定义视图 frame 的事件会交由视图处理。如果你的视图不处理这个事件，它会继续传递到父视图。因为普通视图对象不处理事件，它会首先传递到它的视图控制器。如果视图控制器不处理事件，事件会继续传递到普通视图对象 `UIView` 的父视图，在这个例子中它是 window 对象。
+图 7-1 演示视图层次结构内的事件流程。假设你有一个嵌入到屏幕尺寸大小的通用视图对象中的自定义视图，而它们又是被视图控制器管理。到达自定义视图 frame 的事件会交由视图处理。如果你的视图不处理这个事件，它会继续传递到父视图。**因为通用视图对象不处理事件**，它会首先传递这些事件到它的视图控制器。如果视图控制器不处理事件，事件会继续传递到通用视图对象 `UIView` 的父视图，在这个例子中它是 window 对象。
 
-**图 7-1** 响应者队列中的视图控制器
+**图 7-1** 响应链中的视图控制器
 ![](./event_passing_2x.png)
 
-> **注意：**视图控制器和它的视图之间的消息传递关系由视图控制器私有管理并且不能通过应用程序以编程方式更改。
+> **注意：**视图控制器和它的视图之间的消息传递关系被视图控制器私有管理并且不能通过应用程序以编程方式更改。
 
-尽管你可能不想在视图控制器中处理具体的触摸事件，你可以用它来处理基于运动的事件。你也可以使用它协调第一个响应者的设置和更改。更多关于事件如何在 iOS 应用程序中分布和处理，见 [Event Handling Guide for iOS](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541)。
+虽然你可能不想在视图控制器中处理特殊的触摸事件，你可以用它处理基于运动的事件。你也可以使用它协调第一个响应者的设置和更改。更多关于事件如何在 iOS 应用程序中分布和处理，见 [Event Handling Guide for iOS](https://developer.apple.com/library/ios/documentation/EventHandling/Conceptual/EventHandlingiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40009541)。
 
 ---
 
