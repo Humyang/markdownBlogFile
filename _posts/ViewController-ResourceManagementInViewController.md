@@ -223,8 +223,6 @@ b.使用 [addSubview:](https://developer.apple.com/library/ios/documentation/UIK
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
 
----
-
 [*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resizing the View Controller's Views》*](../VCP6) 

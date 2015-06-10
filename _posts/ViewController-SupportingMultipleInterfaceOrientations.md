@@ -1,12 +1,12 @@
 layout: [post]
 title: "iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》"
-date: 2015-06-07 03:48:20
+date: 2014-06-07 03:48:20
 tags: 
 - iOS
 categories: 
 - iOS 开发
 - 翻译
-id: "VCP5"
+id: "VCP8"
 
 ---
 
@@ -34,13 +34,13 @@ iOS 视图控制器编程指南：视图控制器的资源管理
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
 
-*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*
+[*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resizing the View Controller's Views》*](../VCP6) 
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》*](../VCP7) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》*](../VCP8) 
+*iOS 笔记 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》*
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Accessibility from the View Controllers's Perspective》*](../VCP9) 
 

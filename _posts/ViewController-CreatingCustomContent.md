@@ -326,7 +326,6 @@ Message UI framework 提供了 [MFMailComposeViewController](https://developer.a
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
 
----
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
 
