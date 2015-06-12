@@ -1,6 +1,6 @@
 layout: [post]
 title: "iOS 笔记 《View Controller Programming Guide for iOS：Resizing the View Controler's Views》"
-date: 2015-06-07 03:48:20
+date: 2015-06-10 18:01:02
 tags: 
 - iOS
 categories: 
@@ -86,9 +86,9 @@ iOS 视图控制器编程指南：调整视图控制器的视图
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
 
-*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*
+[*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Resizing the View Controller's Views》*](../VCP6) 
+*iOS 笔记 《View Controller Programming Guide for iOS：Resizing the View Controller's Views》*
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》*](../VCP7) 
 

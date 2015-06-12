@@ -1,12 +1,12 @@
 layout: [post]
 title: "iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》"
-date: 2015-06-07 03:48:20
+date: 2015-06-10 18:01:03
 tags: 
 - iOS
 categories: 
 - iOS 开发
 - 翻译
-id: "VCP8"
+id: "VCP7"
 
 ---
 
@@ -48,11 +48,11 @@ iOS 视图控制器编程指南：在响应链中使用视图控制器
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
 
-*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*
+[*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Resizing the View Controller's Views》*](../VCP6) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》*](../VCP7) 
+[*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》*
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》*](../VCP8) 
 

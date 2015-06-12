@@ -1,6 +1,11 @@
 layout: [post]
+<<<<<<< HEAD
 title: "iOS 笔记 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》"
 date: 2015-06-07 03:48:20
+=======
+title: "iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》"
+date: 2014-06-07 03:48:20
+>>>>>>> origin/master
 tags: 
 - iOS
 categories: 
@@ -243,7 +248,11 @@ iOS 设备的加速度传感器可以判断设备当前的方向。默认情况�
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》*](../VCP7) 
 
+<<<<<<< HEAD
 *iOS 笔记 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》* 
+=======
+*iOS 笔记 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》*
+>>>>>>> origin/master
 
 [*iOS 笔记 《View Controller Programming Guide for iOS：Accessibility from the View Controllers's Perspective》*](../VCP9) 
 

@@ -1,6 +1,6 @@
 layout: [post]
 title: "iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》"
-date: 2015-06-07 03:48:20
+date: 2014-06-07 03:48:20
 tags: 
 - iOS
 categories: 
