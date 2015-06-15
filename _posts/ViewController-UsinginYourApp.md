@@ -1,5 +1,5 @@
 layout: [post]
-title: "iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》"
+title: "iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》"
 date: 2015-05-26 23:51:26
 tags: 
 - iOS
@@ -227,35 +227,35 @@ segue 只连接保存在同一个故事板的场景。需要从另一个故事�
 
 系列文章
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Introduction》*](../VCP0) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Introduction》*](../VCP0) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：View Controller Basics》*](../VCP1) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：View Controller Basics》*](../VCP1) 
 
-*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*
+*iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》*](../VCP3) 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》*](../VCP3) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Resizing the View Controller's Views》*](../VCP6) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Resizing the View Controller's Views》*](../VCP6) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》*](../VCP7) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》*](../VCP7) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》*](../VCP8) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》*](../VCP8) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Accessibility from the View Controllers's Perspective》*](../VCP9) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controllers's Perspective》*](../VCP9) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》*](../VCP10) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》*](../VCP10) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Coordinating Efforts Between View Controllers》*](../VCP11) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Coordinating Efforts Between View Controllers》*](../VCP11) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Enabling Edit Mode in a View Controller》*](../VCP12) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Enabling Edit Mode in a View Controller》*](../VCP12) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Segues》*](../VCP13) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Segues》*](../VCP13) 
 
-[*iOS 笔记 《View Controller Programming Guide for iOS：Creating Custom Container View Controllers》*](../VCP14)
+[*iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Container View Controllers》*](../VCP14)
 
 
 

@@ -1,3 +1,21 @@
+layout: [post]
+title: "iOS 笔记 《Start Developing iOS Apps Today：Defining the Interaction》"
+date: 2015-06-15 22:39:20
+tags: 
+- iOS
+categories: 
+- iOS 开发
+- 笔记
+id: "SDT0"
+
+---
+
+讲解应用程序内视图，事件，action，Outlets 之间如何交互。
+
+
+<!-- more -->
+
+
 [原文地址](https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/DefiningtheInteraction.html#//apple_ref/doc/uid/TP40011343-CH7-SW1)
 
 ##Defining the Interaction

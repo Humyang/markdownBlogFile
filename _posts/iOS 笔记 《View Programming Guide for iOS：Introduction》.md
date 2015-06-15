@@ -1,5 +1,5 @@
 ﻿layout: [post]
-title: "iOS 笔记 《View Programming Guide for iOS：Introduction》"
+title: "iOS 翻译 《View Programming Guide for iOS：Introduction》"
 date: 2015-04-25 08:34:26
 tags: 
 - iOS
@@ -68,13 +68,13 @@ id: "iOS-Note-View-Programming-Guide-for-iOS-Introduction"
 ---
 系列文章
 
-*iOS 笔记 《View Programming Guide for iOS：Introduction》*
+*iOS 翻译 《View Programming Guide for iOS：Introduction》*
 
-[*iOS 笔记 《View Programming Guide for iOS：View and Window Architecture》*](../iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture) 
+[*iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》*](../iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture) 
 
-[*iOS 笔记 《View Programming Guide for iOS：Windows》*](../iOS-Note-View-Programming-Guide-for-iOS-Windows) 
+[*iOS 翻译 《View Programming Guide for iOS：Windows》*](../iOS-Note-View-Programming-Guide-for-iOS-Windows) 
 
-[*iOS 笔记 《View Programming Guide for iOS：Views》* ](../iOS-Note-View-Programming-Guide-for-iOS-Views) 
+[*iOS 翻译 《View Programming Guide for iOS：Views》* ](../iOS-Note-View-Programming-Guide-for-iOS-Views) 
 
-[*iOS 笔记 《View Programming Guide for iOS：Animations》*](../iOS-Note-View-Programming-Guide-for-iOS-Animations) 
+[*iOS 翻译 《View Programming Guide for iOS：Animations》*](../iOS-Note-View-Programming-Guide-for-iOS-Animations) 
 

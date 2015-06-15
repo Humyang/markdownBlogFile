@@ -1,5 +1,5 @@
 layout: [post]
-title: "iOS 笔记 《View Programming Guide for iOS：Views》"
+title: "iOS 翻译 《View Programming Guide for iOS：Views》"
 date: 2015-05-04 16:04:32
 tags: 
 - iOS
@@ -521,12 +521,12 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 ---
 系列文章
 
-[*iOS 笔记 《View Programming Guide for iOS：Introduction》*](../iOS-Note-View-Programming-Guide-for-iOS-Introduction) 
+[*iOS 翻译 《View Programming Guide for iOS：Introduction》*](../iOS-Note-View-Programming-Guide-for-iOS-Introduction) 
 
-[*iOS 笔记 《View Programming Guide for iOS：View and Window Architecture》*](../iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture)
+[*iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》*](../iOS-Note-View-Programming-Guide-for-iOS-View-and-Window-Architecture)
 
-[*iOS 笔记 《View Programming Guide for iOS：Windows》*](../iOS-Note-View-Programming-Guide-for-iOS-Windows)
+[*iOS 翻译 《View Programming Guide for iOS：Windows》*](../iOS-Note-View-Programming-Guide-for-iOS-Windows)
 
-*iOS 笔记 《View Programming Guide for iOS：Views》* 
+*iOS 翻译 《View Programming Guide for iOS：Views》* 
 
-[*iOS 笔记 《View Programming Guide for iOS：Animations》*](../iOS-Note-View-Programming-Guide-for-iOS-Animations) 
+[*iOS 翻译 《View Programming Guide for iOS：Animations》*](../iOS-Note-View-Programming-Guide-for-iOS-Animations) 

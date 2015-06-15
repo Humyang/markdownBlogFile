@@ -1,5 +1,5 @@
 layout: [post]
-title: "iOS 笔记 《View Programming Guide for iOS：View and Window Architecture》"
+title: "iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》"
 date: 2015-05-04 16:04:08
 tags: 
 - iOS
@@ -285,12 +285,12 @@ UIKit 通过每个视图的 [opaque](https://developer.apple.com/library/ios/doc
 ---
 系列文章
 
-[*iOS 笔记 《View Programming Guide for iOS：Introduction》*](../iOS-Note-View-Programming-Guide-for-iOS-Introduction) 
+[*iOS 翻译 《View Programming Guide for iOS：Introduction》*](../iOS-Note-View-Programming-Guide-for-iOS-Introduction) 
 
-*iOS 笔记 《View Programming Guide for iOS：View and Window Architecture》*
+*iOS 翻译 《View Programming Guide for iOS：View and Window Architecture》*
 
-[*iOS 笔记 《View Programming Guide for iOS：Windows》*](../iOS-Note-View-Programming-Guide-for-iOS-Windows) 
+[*iOS 翻译 《View Programming Guide for iOS：Windows》*](../iOS-Note-View-Programming-Guide-for-iOS-Windows) 
 
-[*iOS 笔记 《View Programming Guide for iOS：Views》* ](../iOS-Note-View-Programming-Guide-for-iOS-Views) 
+[*iOS 翻译 《View Programming Guide for iOS：Views》* ](../iOS-Note-View-Programming-Guide-for-iOS-Views) 
 
-[*iOS 笔记 《View Programming Guide for iOS：Animations》*](../iOS-Note-View-Programming-Guide-for-iOS-Animations) 
+[*iOS 翻译 《View Programming Guide for iOS：Animations》*](../iOS-Note-View-Programming-Guide-for-iOS-Animations) 
