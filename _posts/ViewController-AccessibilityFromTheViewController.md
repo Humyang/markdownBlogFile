@@ -1,6 +1,6 @@
 layout: [post]
 title: "iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》"
-date: 2014-06-19 11:46:20
+date: 2015-06-19 11:46:20
 tags: 
 - iOS
 categories: 
