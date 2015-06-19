@@ -1,3 +1,26 @@
+layout: [post]
+title: "iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controller’s Perspective》"
+date: 2014-06-19 11:46:20
+tags: 
+- iOS
+categories: 
+- iOS 开发
+- 翻译
+id: "VCP9"
+
+---
+
+iOS 视图控制器编程指南：从视图控制器的角度看无障碍访问
+
+
+<!-- more -->
+
+[原文地址](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457-CH1-SW1)
+
+记录关于学习过的 iOS 文档
+
+---
+
 # 从视图控制器的角度看无障碍访问
 
 除了管理视图的行为，视图控制器也协助控制应用程序的无障碍访问。无障碍访问应用程序对每个人都可以使用，无论使用者是残疾人士或者身体功能障碍，它都可以作为有用的工具同时保持应用程序的功能和可用性。
@@ -116,4 +139,37 @@ Magic Tap 的目的是快速执行一些常用的或最有意义的动作。例�
 另一个有用的通知是 [UIAccessibilityVoiceOverStatusChanged](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibility_Protocol/index.html#//apple_ref/c/data/UIAccessibilityVoiceOverStatusChanged)。它可以检测 VoiceOver 的打开或关闭切换。如果 VoiceOver 在应用程序的外部切换开关，当你的应用程序重新回到前台时会接收到这个通知。因为 `UIAccessibilityVoiceOverStatusChanged` 不期望接收任何参数，所以在 selector 中的方法不需要附加冒号 (`:`)。
 
 需要可以观测的通知的完整列表，可以阅读 [*UIAccessibility Protocol Reference*](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAccessibility_Protocol/index.html#//apple_ref/doc/uid/TP40008786) 中的 "Notifications"。记住你可能只会观测到可以通过 UIKit 发布的通知，它是 `NSString` 对象，而没有通过你的应用程序发布的通知，它们是 `int` 类型的通知。
+
+
+---
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Introduction》*](../VCP0) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：View Controller Basics》*](../VCP1) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*](../VCP2) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》*](../VCP3)
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Resizing the View Controller's Views》*](../VCP6) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》*](../VCP7) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》*](../VCP8) 
+
+*iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controllers's Perspective》*
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》*](../VCP10) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Coordinating Efforts Between View Controllers》*](../VCP11) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Enabling Edit Mode in a View Controller》*](../VCP12) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Segues》*](../VCP13) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Container View Controllers》*](../VCP14)
 
