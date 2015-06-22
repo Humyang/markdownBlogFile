@@ -83,9 +83,39 @@
 
 ```
 
+当用户在新食谱输入界面点击完成或取消其中一个按钮时，应用程序会退出视图控制器并使用户回到主窗口。见 [Dismissing a Presented View Controller]()。
 
-## Presentation Contenxts 提供被呈现的视图控制器覆盖的区域
+## 呈现上下文提供被呈现的视图控制器所覆盖的区域
 
-## 退出被呈现的视图控制器
+被用作呈现区域的屏幕区域由呈现上下文决定。默认情况下，呈现上下文由根视图控制器提供，它的框架会被用作定义呈现上下文的框架。但是，呈现中的视图控制器或者在视图层次结构中的其它父辈，都可以选者由它们提供呈现上下文。在这种情况下，当呈现上下文是由其它视图控制器提供时，它们的框架会被用作决定被呈现的视图的框架。这种灵活的方式可以让限制模态呈现成屏幕的一小部分，让其它内容可以显示。
+
+当视图控制器呈现后，iOS 会搜索它的呈现上下文。首先由读取呈现中的视图控制器的 [definePresentationContext]() 属性开始。如果这个属性的值是 YES，那么由呈现中的视图控制器定义呈现上下文。否则，它会继续往视图控制器的层次结构上方搜索直到有视图控制器返回 YES 或者到达窗口的根视图控制器。
+
+当视图控制器定义呈现上下文时，它也可以选择定义呈现风格。通常，被呈现的视图控制器使用它的 [modalTransitionStyle]() 属性决定如何呈现。设置了 definesPresentationContext 为 YES 的视图控制器也可以设置它的 [providesPresentationContextTransitionStyle]() 为 YES。如果 [providesPresentationContextTransitionStyle]() 设置成了 YES，iOS 会使用呈现上下文的 modalPresentationStyle 决定如何呈现新的视图控制器。
+
+
+## 解散被呈现的视图控制器
+
+当需要解散被呈现的视图控制器时，最好的方式是让呈现中的视图控制器解散它。换句话说，最要有可能，都应该由同一个呈现中的视图控制器负责解散它。尽管有几种方法通知呈现中的视图控制器需要它解散被呈现的视图控制器，但是最好的技术是使用委托。更多信息，键 [Using Delegation to Communicate with Other Controllers]()。
 
 ## 呈现标准系统视图控制器
+
+有几个标准的系统视图控制器设计来让你的应用程序呈现。呈现这些视图控制器的基础规则与呈现你的自定义内容视图控制器规则相同。但是，因为你的应用程序不可以访问系统视图控制器管理的视图层次结构，你不能简单的实现视图中控件的动作。要与系统视图控制器交互通常通过委托对象进行。
+
+每个系统视图控制器都定义了响应的协议，你可以在你的委托对象中实现这些方法。每个委托通常会实现方法接收项被选中或取消的操作。你的委托对象应该始终准备处理这两种情况。最重要的一件事是委托必须要实现解散被呈现的视图控制器通过调用正在呈现的视图控制器的 [dismissModalViewControllerAnimated:]() 方法 (换句话说，被呈现的视图控制器的父辈)。
+
+表 10-2 列出几个 iOS 中的标准系统视图控制器，更多关于这些类的信息，包括它们提供的功能，见相应的类引用文档。
+
+**表 10-2** 标准系统视图控制器
+
+框架  | 视图控制器
+------------- | -------------
+Address Book UI | ABNewPersonViewController<br />ABPeoplePickerNavigationController<br />ABPersonViewController<br />ABUnknownPersonViewController
+Event Kit UI | EKEventEditViewController<br />EKEventViewController<br />
+Game Kit | GKAchievementViewController<br />GKLeaderboardViewController<br />GKMatchmakerViewController<br />GKPeerPickerController<br />GKTurnBasedMatchmakerViewController<br />
+Message UI | MFMailComposeViewController<br />MFMessageComposeViewController
+Media Player | MPMediaPickerController<br />MPMoviePlayerViewController
+UIKit | UIImagePickerController<br />UIVideoEditorController
+
+
+**说明：** 尽管 [MPMoviePlayerController]() 类是在 Media Player 框架中可以在技术上被认为是模态视图控制器，但在语法的使用上略有不同。对于你的呈现中视图控制器，你需要初始化它并告诉它将要播放的多媒体文件。然后由视图控制器处理其它方面的呈现和解散它的视图。(但是，[MPMoviePlayerController]() 类用作 `MPMoviePlayerController` 的替代作为标准视图控制器播放影片。)
