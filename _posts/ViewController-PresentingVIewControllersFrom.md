@@ -1,3 +1,25 @@
+layout: [post]
+title: "iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》"
+date: 2015-07-02 18:12:56
+tags: 
+- iOS
+categories: 
+- iOS 开发
+- 翻译
+id: "VCP10"
+---
+
+iOS 视图控制器编程指南：通过其它视图控制器呈现视图控制器
+
+
+<!-- more -->
+
+[原文地址](https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html#//apple_ref/doc/uid/TP40007457-CH1-SW1)
+
+记录关于学习过的 iOS 文档
+
+---
+
 # 通过其它视图控制器呈现视图控制器
 
 这种呈现视图控制器的能力可以让你中断当前的工作流程并显示新的视图集合。大部分情况下，应用程序呈现视图控制器临时中断工作流程是为了向用户获取重要数据。但你也可以使应用程序在特定的时间显示备用界面通过使用被呈现的视图控制器。
@@ -119,3 +141,42 @@ UIKit | [UIImagePickerController](https://developer.apple.com/library/ios/docume
 
 
 **说明：** 尽管 [MPMoviePlayerController](https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMoviePlayerController_Class/index.html#//apple_ref/occ/cl/MPMoviePlayerController) 类是在 Media Player 框架中可以在技术上被认为是模态视图控制器，但在语法的使用上略有不同。对于呈现中视图控制器，你需要初始化它并告诉它将要播放的多媒体文件。然后由视图控制器处理其它方面的呈现和解散它的视图。(但是，[MPMoviePlayerViewController](https://developer.apple.com/library/ios/documentation/MediaPlayer/Reference/MPMoviePlayerViewController_class/index.html#//apple_ref/occ/cl/MPMoviePlayerViewController) 类用作 `MPMoviePlayerController` 的替代作为播放影片的标准视图控制器。)
+
+---
+
+系列文章
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Introduction》*](../VCP0)
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：View Controller Basics》*](../VCP1)
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*](../VCP2) 
+
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in Your App》*](../VCP2) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Content View Controllers》*](../VCP3) 
+[*iOS 翻译 《View Controller Programming Guide for iOS：Resource Management in View Controllers》*](../VCP4) 
+
+
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Responding to Display-Related Notifications》*](../VCP5) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Resizing the View Controller's Views》*](../VCP6) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Using View Controllers in the Responder Chain》*](../VCP7) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Supporting Multiple Interface Orientations》*](../VCP8) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Accessibility from the View Controllers's Perspective》*](../VCP9) 
+
+iOS 翻译 《View Controller Programming Guide for iOS：Presenting View Controllers from Other View Controllers》* 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Coordinating Efforts Between View Controllers》*](../VCP11) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Enabling Edit Mode in a View Controller》*](../VCP12) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Segues》*](../VCP13) 
+
+[*iOS 翻译 《View Controller Programming Guide for iOS：Creating Custom Container View Controllers》*](../VCP14)
+
