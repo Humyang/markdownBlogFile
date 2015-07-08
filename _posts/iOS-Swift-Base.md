@@ -1,10 +1,22 @@
-Swift 笔记
+layout: [post]
+title: "iOS Swift 基础"
+date: 2015-07-08 23:16:11
+tags: 
+- iOS
+categories: 
+- iOS 
+- 备忘
+id: "iOS-Swift-Base"
 
-最近许多文章都用到 Swift，学习一下 Swift 基础，避免看视频，博客时遇到麻烦。
+---
+
+最近看到许多资料都用到 Swift，学习一下 Swift 基础，避免在看视频，博客时卡住。
+
+<!-- more -->
 
 开发环境：Xcode 6.4，知识点主要来源于[极客学院](http://www.jikexueyuan.com/path/ios/)的 iOS 视频教程和 Apple 的 [The Swift Programming Language](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/CollectionTypes.html#//apple_ref/doc/uid/TP40014097-CH8-ID105)。
 
-Swift 的语法变化挺快的，下面如果编译时错了如果不是写错了那么可能语法已经更改，建议去 The Swift Programming Language 查看最新语法。还有一种可能就是编译器的问题，编译器对语法的要求很严格，导致语法正确也报错。
+Swift 的语法变化挺快的，下面如果编译时错了那么可能语法已经更改，建议去 The Swift Programming Language 查看最新语法。还有编译器对代码的格式要求很严格，这也是报错的可能。
 
 #基本语法
 

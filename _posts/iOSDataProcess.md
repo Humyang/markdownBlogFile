@@ -1,6 +1,19 @@
-# iOS 数据操作
+layout: [post]
+title: "iOS 数据操作"
+date: 2015-07-08 23:15:11
+tags: 
+- iOS
+categories: 
+- iOS 
+- 备忘
+id: "iOS-DataProcess"
+---
 
-[toc]
+记录了 iOS 中数据操作相关的知识点，包括 SandBox 的概念，XML 数据处理，JSON 数据处理，SQLite 增删改查，plist 文件。
+
+<!-- more -->
+
+# iOS 数据操作
 
 ## SandBox 
 

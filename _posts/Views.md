@@ -4,7 +4,7 @@ date: 2015-05-04 16:04:32
 tags: 
 - iOS
 categories: 
-- iOS 开发
+- iOS
 - 翻译
 id: "iOS-Note-View-Programming-Guide-for-iOS-Views"
 

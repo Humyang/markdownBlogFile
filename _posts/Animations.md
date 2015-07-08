@@ -4,7 +4,7 @@ date: 2015-05-12 23:29:32
 tags: 
 - iOS
 categories: 
-- iOS 开发
+- iOS
 - 翻译
 id: "iOS-Note-View-Programming-Guide-for-iOS-Animations"
 

@@ -4,7 +4,7 @@ date: 2015-06-15 22:39:20
 tags: 
 - iOS
 categories: 
-- iOS 开发
+- iOS
 - 笔记
 id: "SDT0"
 

@@ -4,7 +4,7 @@ date: 2015-04-25 08:30:26
 tags: 
 - iOS
 categories: 
-- iOS 开发
+- iOS
 - 翻译
 id: "iOS-Note-About-the-iOS-Technologies-Cocoa-Touch-Layer"
 

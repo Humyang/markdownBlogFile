@@ -4,7 +4,7 @@ date: 2015-06-19 11:46:20
 tags: 
 - iOS
 categories: 
-- iOS 开发
+- iOS
 - 翻译
 id: "VCP9"
 

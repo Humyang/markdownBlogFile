@@ -1,6 +1,20 @@
-[toc]
+layout: [post]
+title: "iOS DEMO 项目：SPHChatCollectionView 分析"
+date: 2015-07-08 23:14:11
+tags: 
+- iOS
+categories: 
+- iOS 
+- 备忘
+id: "iOS-DEMO-SPH"
+---
 
-网络下载的聊天程序界面 MODE 的源代码整理，日后用到时作为参考。[源文件地址](https://github.com/sibahota059/SPHChatCollectionView)，项目文件名称是 SPHChatCollectionView-master。自己照着这个项目另外写了一遍，变量名称也跟着改了一些。
+网络下载的聊天程序界面 DEMO 的源代码整理，日后用到时作为参考。
+
+<!-- more -->
+
+
+[源文件地址](https://github.com/sibahota059/SPHChatCollectionView)，项目文件名称是 SPHChatCollectionView-master。自己照着这个项目另外写了一遍，变量名称也跟着改了一些。
 
 #源码逻辑分析
 
@@ -362,7 +376,7 @@ CCB_PARAM_List *feed_data = [[CCB_PARAM_List alloc] init];
 
 **图 1-4**  cap insets 的范围
 
-![](./1-4 capInset.png)
+![](./1-4capInset.png)
 
 ## CCBImageBubbleView
 
@@ -541,9 +555,8 @@ GCD 队列可以并发执行或者排队执行(当它们是一个队列，并且
 
 ## UICollectionViewLayout
 
-挺大的内容：https://developer.apple.com/library/prerelease/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/CreatingCustomLayouts/CreatingCustomLayouts.html。
+挺大的内容，[文档地址](https://developer.apple.com/library/prerelease/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/CreatingCustomLayouts/CreatingCustomLayouts.html)。
 
-详细链接(未完成)
 
 ## options:@{}
 
