@@ -88,17 +88,17 @@ CCBCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdenti
     cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     
 /*
-
-资料地址：http://jeffreysambells.com/2013/03/01/asynchronous-operations-in-ios-with-grand-central-dispatch
-C 语言的 API，GCD。
-
-异步执行一些耗时的方法，避免用户界面被锁定。
-这些代码会分配到其它线程中执行，让你的 UI 主线程继续执行任务。
-GCD 队列可以并发执行或者排队执行(当它们是一个队列，并且一个执行完成之后后面的接着执行)
-
-完整笔记地址：未完成
-
-*/
+     
+     资料地址：http://jeffreysambells.com/2013/03/01/asynchronous-operations-in-ios-with-grand-central-dispatch
+     C 语言的 API，GCD。
+     
+     代码块内的代码将会发送给第一个参数中指定的线程执行
+     
+     GCD 队列可以并发执行或者排队执行(当它们是一个队列，并且一个执行完成之后后面的接着执行)
+     
+     完整笔记地址：未完成
+     
+     */
     dispatch_async(dispatch_get_main_queue(), ^
                    {
                        //        循环该表格行中所有子视图,将子视图从父视图中移除
