@@ -24,7 +24,7 @@ Swift 的语法变化挺快的，下面如果编译时错了那么可能语法�
 
 main.swift:
 
-```
+```swift
 
 import Foundation
 
@@ -36,15 +36,45 @@ println("Hello, World!")
 
 变量
 
-```
+```swift
 var a ＝ 1
 a = 10
 var b = c
-```
+```swift
 
 常量，设定值后不允许再次修改值。
 
 `let c = a + b `
+
+## weak ，unowned 和 strong 
+
+`weak` 和 `unowned` 不会提升 ARC 的 retain count。
+
+带有 weak 的变量可能会变成 nil，所以使用 weak 变量之前有义务使用 optional type 进行检查。
+
+optional：
+
+```swiftObjective-C
+
+func compute(x: Int?) -> String {
+  // This function uses optional binding to deconstruct optionals
+  if let y = x {
+    return "The value is: \(y)"
+  } else {
+    return "No value"
+  }
+}
+
+print(compute(42)) // The value is: 42
+print(compute(nil)) // No value
+
+```
+
+`unowned` 会假设在它的生命周期期间永远不会变成 nil，它需要在初始化时就设置好它的值。这意味着使用它的变量时不需要进行 optional type 检测。如果某个对象以某种方式将它释放了，那么 unowned reference 再次被使用时会应用程序会崩溃。
+
+
+> Apple docs:
+> Use a weak reference whenever it is valid for that reference to become nil at some point during its lifetime. Conversely, use an unowned reference when you know that the reference will never be nil once it has been set during initialization.
 
 ## Swift 数据类型
 
@@ -54,7 +84,7 @@ var b = c
 
 定义特定类型
 
-``` 
+```swift 
 
 var s:String = "World"
 
@@ -63,6 +93,7 @@ var i:Int = 100
 var Words:String = "World"
 
 ```
+
 > **说明：**一般来说不需要指定类型，Swift 会自动分析类型。
 
 ## 字符串连接
@@ -70,7 +101,7 @@ var Words:String = "World"
  
 ### 字符串相加
 
-```
+```swift
 var str = "Hello "
 str = str + "World"
 
@@ -82,7 +113,7 @@ println(str)
 
 ### 不同类型连接
 
-```
+```swift
 
 var i = 200
 var str = "Hello "
@@ -124,7 +155,7 @@ str = "\(str),Other Str,\(100),\(i)"
 
 ### 基本循环
 
-```
+```swift
 var arr =[String]()
 
 for index in 0...100{
@@ -133,13 +164,19 @@ for index in 0...100{
 
 println(arr)
 
+for var index = 0; index < 3; ++index {
+    println("index is \(index)")
+}
+
 ```
+
+
 
 ### for in
 
 
 
-```
+```swift
 
 //array 是一个数组
 
@@ -152,7 +189,7 @@ for value in array{
 
 ### while
 
-```
+```swift
 
 var i = 0
 
@@ -167,7 +204,7 @@ while i<arr.count {
 
 ### 遍历字典
 
-```
+```swift
 
 var dict = ["name" : "Hello","age" : "18"]
 
@@ -176,9 +213,10 @@ for(key,value) in dict{
 }
 
 ```
+
 ## 流程控制
 
-```
+```swift
 
 for index in 0...100{
 	if index%2==0 {
@@ -199,7 +237,7 @@ if let name = myName {
 
 ## 函数
 
-```
+```swift
 
 func sayHello(name:String){
 	println("Hello \(name)")
@@ -211,7 +249,7 @@ sayHello("JiKe");
 
 ### 指定返回值类型
 
-```
+```swift
 
 func getNums()->Int{
 	return 2
@@ -224,7 +262,7 @@ func getNums()->Int{
 
 ### 返回多个值
 
-```
+```swift
 
 func getNums()->(Int,Int){
 	return (2,3)
@@ -239,7 +277,7 @@ println(a)
 
 ### 函数当变量使用
 
-```
+```swift
 
 var fun = sayHello
 
@@ -256,7 +294,7 @@ fun("ZhangSan")
 
 ### 基本代码
 
-```
+```swift
 
 class Hi{
 	func sayHi(){
@@ -302,24 +340,60 @@ h.sayHi()
 
 ```
 
-## 类的动态拓展
+#### 静态方法和静态变量
 
-在不改变类的继承结构下拓展类的功能的一种方式
+```swift
+
+
+class Foo {
+    var name: String?           // instance property
+    class var all: Foo[] = []   // type property NOT YET SUPPORTED
+    class var comp: Int {       // computed type property
+        return 42
+    }
+
+    class func alert() {        // type method
+        println("There are \(all.count) foos")
+    }
+}
 
 ```
 
-extension Hi(){
-	func sayHaHa(){
-	}
+## 类的动态拓展
+
+```swift
+
+//在不改变类的继承结构下拓展类的功能的一种方式
+extension Hi {
+    func sayHaHa(){
+        println("Hello,sayHaHa")
+    }
 }
 
-这时可以在 Hi 的例子中调用 sayHaha，并且 Hi 的所有继承的子类中也会拥有 Haha
+class Hi{
+    func sayHi() {
+        println("Hello,JiKe")
+    }
+}
+
+//在不改变类的继承结构下拓展类的功能的一种方式
+extension Hi {
+    func sayHaHa2(){
+        println("Hello,sayHaHa2")
+    }
+}
+
+var miko:Hi = Hi()
+
+miko.sayHaHa()
+miko.sayHi()
+miko.sayHaHa2()
 
 ```
 
 ## 协议
 
-```
+```swift
 
 protpcol People{
 	func getName()->String
@@ -344,7 +418,7 @@ Swift 中并没有命名空间，通过类的嵌套可以实现命名空间的�
 
 ### 直接的写法
 
-```
+```swift
 
 class com{
 	class jike{
@@ -360,7 +434,7 @@ class com{
 
 ### 使用拓展添加类到命名空间中
 
-```
+```swift
 
 class com{
 	class jike{
@@ -385,3 +459,63 @@ extension com.jike{
 
 
 ```
+
+## 单例写法
+
+资料来源：[stackoverflow](http://stackoverflow.com/questions/24024549/dispatch-once-singleton-model-in-swift)
+
+
+
+### Class constant
+
+```swift
+
+class Singleton  {
+   static let sharedInstance = Singleton()
+}
+
+```
+
+This approach supports lazy initialization because Swift lazily initializes class constants (and variables), and **is thread safe by the definition of let**.
+
+Class constants were introduced in **Swift 1.2**. If you need to support an earlier version of Swift, use the nested struct approach below or a global constant.
+
+类中有了 `static let sharedInstance = Singleton()` 如果类还有实例变量，那么还需要重载 init 方法了。
+
+### Nested struct
+
+```swift
+
+class Singleton {
+    class var sharedInstance: Singleton {
+        struct Static {
+            static let instance: Singleton = Singleton()
+        }
+        return Static.instance
+    }
+}
+
+```
+
+Here we are using the static constant of a nested struct as a class constant. This is a workaround for the lack of static class constants in **Swift 1.1 and earlier**, and still works as a workaround for the lack of static constants and variables in functions.
+
+### dispatch_once
+
+```objc
+
+class Singleton {
+    class var sharedInstance: Singleton {
+        struct Static {
+            static var onceToken: dispatch_once_t = 0
+            static var instance: Singleton? = nil
+        }
+        dispatch_once(&Static.onceToken) {
+            Static.instance = Singleton()
+        }
+        return Static.instance!
+    }
+}
+
+```
+
+The traditional Objective-C approach ported to Swift. I'm fairly certain there's no advantage over the nested struct approach but I'm putting it here anyway as I find the differences in syntax interesting.
