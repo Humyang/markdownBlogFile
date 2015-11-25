@@ -22,7 +22,7 @@ id: "HTTP-data-communication"
 
 ### 读取网页数据保存为字符串
 
-```
+```swift
 
         //将网页内容读取成字符串
         var str = NSString(contentsOfURL: NSURL(string:"http://www.jikexueyuan.com")!, encoding: NSUTF8StringEncoding, error: nil)
@@ -33,7 +33,7 @@ id: "HTTP-data-communication"
 
 ### 读取网页数据保存为二进制数据
 
-```
+```swift
 
 //        将网页内容读取成二进制
         var data = NSData(contentsOfURL: NSURL(string: "http://www.jiekexueyuan.com")!)
@@ -52,7 +52,7 @@ id: "HTTP-data-communication"
 
 #### 同步加载
 
-```
+```swift
 
 		var resp:NSURLResponse?
         var error:NSError?
@@ -78,7 +78,7 @@ id: "HTTP-data-communication"
 
 #### 异步加载
 
-```
+```swift
 
 //异步加载网络数据
         
@@ -100,7 +100,7 @@ id: "HTTP-data-communication"
 
 ### GET 方式
 
-```
+```swift
 
 		NSURLConnection.sendAsynchronousRequest(NSURLRequest(URL:NSURL(string: "http://www.jikexueyuan/index.heml?name=example")!), queue: NSOperationQueue(), completionHandler: { (resp:NSURLResponse!, data:NSData!, error:NSError!) -> Void in
             
@@ -135,7 +135,7 @@ id: "HTTP-data-communication"
 
 ### POST 方式
 
-```
+```swift
 
         //POST 方式传递数据
         

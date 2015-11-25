@@ -54,7 +54,7 @@ var b = c
 
 optional：
 
-```swiftObjective-C
+```swift
 
 func compute(x: Int?) -> String {
   // This function uses optional binding to deconstruct optionals

@@ -52,7 +52,7 @@ iOS 设备中的加速度传感器可以判断设备当前的方向。默认情�
 
 清单 8-1 实现 `supportedInterfaceOrientations` 方法
 
-```
+```objc
 
 - (NSUInteger)supportedInterfaceOrientations
 {
@@ -74,7 +74,7 @@ iOS 设备中的加速度传感器可以判断设备当前的方向。默认情�
 
 **清单 8-2** 实现 `preferredInterfaceOrientationForPresentation` 方法
 
-```
+```objc
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
@@ -110,7 +110,7 @@ iOS 设备中的加速度传感器可以判断设备当前的方向。默认情�
 
 **清单 8-3** 实现 `shouldAutorotateToInterfaceOrientation:` 方法
 
-```
+```objc
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
 {

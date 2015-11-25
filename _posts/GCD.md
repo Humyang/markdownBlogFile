@@ -38,7 +38,7 @@ GCD queues can be concurrent or serial but serial queues (where there is one que
 
 The more important functions you’ll need are for creating the queue:
 
-```
+```objc
 //创建一个 queue
 dispatch_queue_t dispatch_queue_create(const char *label, dispatch_queue_attr_t attr); 
 
@@ -46,7 +46,7 @@ dispatch_queue_t dispatch_queue_create(const char *label, dispatch_queue_attr_t 
 
 and adding blocks to the queue:
 
-```
+```objc
 //向 queue 分配 block
 void dispatch_async(dispatch_queue_t queue, dispatch_block_t block);
 
@@ -54,7 +54,7 @@ void dispatch_async(dispatch_queue_t queue, dispatch_block_t block);
 
 There’s also a couple helper functions for retrieving specific queues such as:
 
-```
+```objc
 //两个辅助使用的特殊 queue
 dispatch_queue_t dispatch_get_current_queue(void);//将 block 分配到当前的队列
 dispatch_queue_t dispatch_get_main_queue(void);// 将 block 分配到 UI 主线程
@@ -67,7 +67,7 @@ The `dispatch_get_main_queue` function is **very useful for updating the iOS app
 
 A typical GCD call would look something like this:
 
-```
+```objc
 
 // Doing something on the main thread
 
@@ -90,7 +90,7 @@ dispatch_async(myQueue, ^{
 
 GCD relies on block so it has a really nice, readable syntax. It becomes clear what happes in the background thread and the main thread. For example, here’s how you might load a few images
 
-```
+```objc
 //在 background thread 加载图片，加载完成后使用 dispatch_get_main_queue 更新 main UI 界面
 NSArray *images = @[@"http://example.com/image1.png",
                  @"http://example.com/image2.png",
@@ -129,7 +129,7 @@ You’ll notice I check for imageView before dispatching to the main thread. Thi
 
 If you want to run a single independent queued operation and you’re not concerned with other concurrent operations, you can use the global concurrent queue:
 
-```
+```objc
 dispatch_queue_t globalConcurrentQueue =
 dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
@@ -160,7 +160,7 @@ The dispatch_get_current_queue function will return the current queue from which
 
 The dispatch_get_main_queue function is very useful for updating the iOS app’s UI as UIKit methods are not thread safe (with a few exceptions) so any calls you make to update UI elements must always be done from the main queue.
 
-```
+```objc
 
 A typical GCD call would look something like this:
 
@@ -183,7 +183,7 @@ dispatch_async(myQueue, ^{
 
 GCD relies on block so it has a really nice, readable syntax. It becomes clear what happes in the background thread and the main thread. For example, here’s how you might load a few images:
 
-```
+```objc
 
 NSArray *images = @[@"http://example.com/image1.png",
                  @"http://example.com/image2.png",
@@ -223,7 +223,7 @@ That’s it. Start build queues and making your UI more responsive.
 
 If you want to run a single independent queued operation and you’re not concerned with other concurrent operations, you can use the global concurrent queue:
 
-```
+```objc
 
 dispatch_queue_t globalConcurrentQueue =
 dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)

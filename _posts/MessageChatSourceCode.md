@@ -35,7 +35,7 @@ id: "iOS-DEMO-SPH"
 
 从这个函数中分配当前视图控制器和根视图控制器，并使窗口可见，所以调试第一步从这里开始
 
-```
+```objc
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -47,7 +47,7 @@ id: "iOS-DEMO-SPH"
     return YES;
 }
 
-```
+```objc
 
 #CCBViewController
 
@@ -55,7 +55,7 @@ id: "iOS-DEMO-SPH"
 
 ##viewDidLoad
 
-```
+```objc
 
 - (void)viewDidLoad {
     
@@ -72,12 +72,12 @@ id: "iOS-DEMO-SPH"
 	
 }
 
-```
+```objc
 ##collectionView:cellForItemAtIndexPath:
 
 最常用的函数，按顺序生成每一行 CELL。
 
-```
+```objc
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -96,7 +96,7 @@ CCBCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdenti
      
      GCD 队列可以并发执行或者排队执行(当它们是一个队列，并且一个执行完成之后后面的接着执行)
      
-     完整笔记地址：未完成
+     完整笔记地址：http://humyang.github.io/2015/GCDIntro/
      
      */
     dispatch_async(dispatch_get_main_queue(), ^
@@ -120,13 +120,13 @@ CCBCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdenti
     
     return cell;
 }
-```
+```objc
 
 ##setFeedData:
 
 这个函数内是主要的设置对话界面的样式，通过 sphBubbledata.chat_media_type 判断如何渲染对话界面
 
-```
+```objc
 
 if ([feed_data.chat_media_type isEqualToString:kSTextByme]) 
 {
@@ -143,11 +143,11 @@ else if ([feed_data.chat_media_type isEqualToString:kSImagebyme])
 else
 {
 }
-```
+```objc
 
 下面是其中一个条件的执行语句
 
-```
+```objc
 
 if ([feed_data.chat_media_type isEqualToString:kSTextByme]) {
         
@@ -220,7 +220,7 @@ if ([feed_data.chat_media_type isEqualToString:kSTextByme]) {
     }
 
 
-```
+```objc
 
 **图 1-2** textMessageBubble.frame 的参数调整对比的效果
 
@@ -234,7 +234,7 @@ if ([feed_data.chat_media_type isEqualToString:kSTextByme]) {
 
 在这个委托中实现 CELL 尺寸的调整，使它适应文本的高度
 
-```
+```objc
 
 CCB_PARAM_List *feed_data = [[CCB_PARAM_List alloc] init];
     
@@ -268,7 +268,7 @@ CCB_PARAM_List *feed_data = [[CCB_PARAM_List alloc] init];
 
 聊天对话 CELL 的类，CELL 的资源文件也是从 xib 文件中加载。在 ViewController 的 viewDidLoad 中加载并注册
 
-```
+```objc
 
 [self.sphChatTable registerNib:[UINib nibWithNibName:@"Cell" bundle:nil] forCellWithReuseIdentifier:CellIdentifier];
 
@@ -279,7 +279,7 @@ CCB_PARAM_List *feed_data = [[CCB_PARAM_List alloc] init];
 
 ###sizeToFit
 
-```
+```objc
 
 -(void) sizeToFit
 {
@@ -303,7 +303,7 @@ CCB_PARAM_List *feed_data = [[CCB_PARAM_List alloc] init];
 
 生成聊天文字气泡的函数
 
-```
+```objc
 
 -(id) initWithText:(NSString *)text withColor:(UIColor *)color withHighlightColor:(UIColor *)highlightColor withTailDirection:(MessageBubbleViewButtonTailDirection)tailDirection maxWidth:(CGFloat)maxWidth
 {
@@ -389,7 +389,7 @@ CCB_PARAM_List *feed_data = [[CCB_PARAM_List alloc] init];
 具体步骤是加载蒙板图片，然后调整适当大小，然后加载实际图片，然后在 `UIImageView *maskedImageView = [[UIImageView alloc] initWithImage:[image maskWithImage:maskImageDrawnToSize]]；` 把两张图片进行合并。
 
 
-```
+```objc
 
 -(id) initWithImage:(UIImage *)image withTailDirection:(MessageBubbleVIewTailDirection)tailDirection atSize:(CGSize)size
 {
@@ -440,7 +440,7 @@ CCB_PARAM_List *feed_data = [[CCB_PARAM_List alloc] init];
 
 例如，你有两个类：
 
-```
+```objc
 @interface A:NSObject
 - (B*)calculateMyBNess;
 @end
@@ -452,7 +452,7 @@ CCB_PARAM_List *feed_data = [[CCB_PARAM_List alloc] init];
 ```
 这时编译是失败的，因为它们互相依赖，这时加上 @class 就能正常编译。
 
-```
+```objc
 @class B;
 @interface A:NSObject
 - (B*)calculateMyBNess;
@@ -490,7 +490,7 @@ Categories are a powerful feature that allows you to extend the functionality of
 
 [资料来源：](http://code.tutsplus.com/tutorials/objective-c-succinctly-categories-and-extensions--mobile-22016)
 
-```
+```objc
 
 // Ship.h
 #import <Foundation/Foundation.h>
@@ -508,7 +508,7 @@ Categories are a powerful feature that allows you to extend the functionality of
 
 
 
-```
+```objc
 
 // Ship.m
 #import "Ship.h"
@@ -562,7 +562,7 @@ GCD 队列可以并发执行或者排队执行(当它们是一个队列，并且
 
 问题来源：
 
-```
+```objc
 
 CGRect textRect=[calculationView.text 
 boundingRectWithSize:CGSizeMake(self.maxWidth-self.contentInsets.left-self.contentInsets.right, 10000000)
@@ -577,7 +577,7 @@ context:ctx];
 `calculationView.font` ：This property applies to the entire text string. The default font is a 17-point Helvetica plain font.
 
 `NSFontAttributeName`，是通过封装的 `NSString`：
-```
+```objc
 UIKIT_EXTERN NSString *const NSFontAttributeName NS_AVAILABLE_IOS(6_0);// UIFont, default Helvetica(Neue) 12
 ```
 
@@ -592,7 +592,7 @@ Creates an edge inset for a button or view.
 
 在生成图片时作为参数传递进去：
 
-```
+```objc
 #define IMAGE_INSETS UIEdgeInsetsMake(13,13,13,21)
 
 UIEdgeInsets imageInsets = IMAGE_INSETS;

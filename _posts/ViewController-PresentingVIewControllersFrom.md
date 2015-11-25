@@ -37,7 +37,7 @@ iOS 视图控制器编程指南：通过其它视图控制器呈现视图控制�
 任何视图控制器对象都可以在同一时间内呈现一个单独的视图控制器，即使视图控制器它们自己就是通过其它视图控制器呈现的。换句话说，你可以以队列的方式呈现的视图控制器，根据需要在其它视图控制器的顶部呈现新的视图控制器。图 10-2 是队列的过程和触发的动作的可视化展示。在这个例子中，当用户点击相机视图中的图标时，应用程序会呈现带有用户照片的视图控制器。点击图像库的工具栏中的动作按钮会提示用户选择相应的动作然后对该动作呈现另一个视图控制器 (这里是人员选取器)。选择联系人后 (或点击取消后) 会退出该界面并回到图像库中。点击完成按钮会退出图像库并回到相机界面。
 
 **图 10-2** 创建模态视图控制器的队列
-![](./modal_chains.png)
+![](./modal_chains.jpg)
 
 在呈现视图控制器的队列中的每个视图控制器都有指它在向队列中周围的其它对象。换句话说，呈现其它视图控制器的被呈现视图控制器的 [presentingViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instp/UIViewController/presentingViewController) 和 [presentedViewController](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIViewController_Class/index.html#//apple_ref/occ/instp/UIViewController/presentedViewController) 属性都拥有有效对象。你可以根据需要使用这些关系追踪队列中的视图控制器。例如，如果用户取消当前的操作，你可以通过解散第一个被呈现的视图控制器来移除队列中的所有对象。解散视图控制器时所解散的不仅仅是视图控制器，也会解散所有由它呈现的视图控制器。
 
@@ -84,7 +84,7 @@ iOS 视图控制器编程指南：通过其它视图控制器呈现视图控制�
 
 清单 10-1 编程方式呈现视图控制器。
 
-```
+```objc
 
 - (void)add:(id)sender {
    // Create the root view controller for the navigation controller

@@ -76,7 +76,7 @@ UIKit 和 Core Animation 都提供了动画效果的支持，但每个技术所�
 
 **清单 4-1** 执行简单的基于块的动画效果
 
-```
+```objc
 [UIView animateWithDuration:1.0 animations:^{
         firstView.alpha = 0.0;
         secondView.alpha = 1.0;
@@ -101,7 +101,7 @@ UIKit 和 Core Animation 都提供了动画效果的支持，但每个技术所�
 
 **清单 4-2** 创建一个动画效果块和自定义选项。
 
-```
+```objc
 
 - (IBAction)showHideView:(id)sender
 {
@@ -139,7 +139,7 @@ UIKit 和 Core Animation 都提供了动画效果的支持，但每个技术所�
 
 **清单 4-3** 执行一个简单的 begin/commit 动画效果
 
-```
+```objc
     [UIView beginAnimations:@"ToggleViews" context:nil];
     [UIView setAnimationDuration:1.0];
  
@@ -175,7 +175,7 @@ UIKit 和 Core Animation 都提供了动画效果的支持，但每个技术所�
 
 **清单 4-4** 使用 begin/commit 方法配置动画效果参数
 
-```
+```objc
 // This method begins the first animation.
 - (IBAction)showHideView:(id)sender
 {
@@ -214,7 +214,7 @@ UIKit 和 Core Animation 都提供了动画效果的支持，但每个技术所�
 
 你的动画效果委托方法特征需要像下面一样：
 
-```
+```objc
 - (void)animationWillStart:(NSString *)animationID context:(void *)context;
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context;
 
@@ -237,7 +237,7 @@ setAnimationDidStopSelector: 选择器方法有一个额外的参数－一个布
 
 **清单 4-5** 拥有不同配置信息的嵌套动画效果
 
-```
+```objc
 [UIView animateWithDuration:1.0
         delay: 1.0
         options:UIViewAnimationOptionCurveEaseOut
@@ -293,7 +293,7 @@ setAnimationDidStopSelector: 选择器方法有一个额外的参数－一个布
 
 **清单 4-6**将已存在的文本视图交换为空文本视图
 
-```
+```objc
 - (IBAction)displayNewPage:(id)sender
 {
     [UIView transitionWithView:self.view
@@ -319,7 +319,7 @@ setAnimationDidStopSelector: 选择器方法有一个额外的参数－一个布
 
 **清单 4-7**使用 begin/commit 方法更改子视图
 
-```
+```objc
     [UIView beginAnimations:@"ToggleSiblings" context:nil];
     [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
     [UIView setAnimationDuration:1.0];
@@ -342,7 +342,7 @@ setAnimationDidStopSelector: 选择器方法有一个额外的参数－一个布
 
 **清单 4-8**在视图控制器中的两个视图之间切换
 
-```
+```objc
 
 - (IBAction)toggleMainViews:(id)sender {
     [UIView transitionFromView:(displayingPrimary ? primaryView : secondaryView)
@@ -380,7 +380,7 @@ UIView 动画效果接口提供连结单个动画效果块的支持使它们能�
 
 **清单 4-9** 混合视图和层的动画效果
 
-```
+```objc
 
 [UIView animateWithDuration:1.0
     delay:0.0

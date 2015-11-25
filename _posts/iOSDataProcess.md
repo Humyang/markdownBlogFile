@@ -35,7 +35,7 @@ id: "iOS-DataProcess"
 
 ##写出文件
 
-```
+```swift
 
 		var sp = 	NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
         
@@ -57,7 +57,7 @@ id: "iOS-DataProcess"
 
 ## 读取文件
 
-```
+```swift
 
 //            两种加载文件方式
             var Loaddata = NSData(contentsOfFile: url!.path!)
@@ -77,7 +77,7 @@ id: "iOS-DataProcess"
 
 ### 存储首选项数据
 
-```
+```swift
 
 	@IBOutlet weak var inputText: UITextView!
     
@@ -95,7 +95,7 @@ id: "iOS-DataProcess"
 
 ### 读取首选项数据
 
-```
+```swift
 
 	@IBOutlet weak var inputText: UITextView!
     
@@ -132,7 +132,7 @@ id: "iOS-DataProcess"
 
 ### XMl 格式
 
-```
+```swift
 
 <data>
     <person age="15">ZhangSan</person>
@@ -155,7 +155,7 @@ id: "iOS-DataProcess"
 
 在 viewDidLoad 读取数据，分配委托对象，并解析
 
-```
+```swift
 		var parser = NSXMLParser(contentsOfURL: NSURL(fileURLWithPath: 		
 		NSBundle.mainBundle().pathForResource("data", ofType: "xml")!))
         
@@ -170,7 +170,7 @@ id: "iOS-DataProcess"
 
 实现委托方法
 
-```
+```swift
 
     var currentNodeName:String!
     
@@ -217,19 +217,19 @@ id: "iOS-DataProcess"
 
 ### 格式
 
-```
+```swift
 [1,3,7,"jike",{"name":"ZhangSan","age":20}]
 
 ```
 
-```
+```swift
 {"language":"Java","type":"static","arr":[2,3,4,5]}
 
 ```
 
 ### 解析 JSON
 
-```
+```swift
 
 		var json:AnyObject? = NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("obj", ofType: "json")!)!)!, options: NSJSONReadingOptions.allZeros, error: nil)
         
@@ -242,7 +242,7 @@ id: "iOS-DataProcess"
 
 ### Swift 生成 JSON
 
-```
+```swift
 
 var dict = ["name":"jikexueyuan","age":1]
         
@@ -270,7 +270,7 @@ Root 节点的类型可以为 Array 或者 Dictionary，决定了读取成字典
 
 解析成数组
 
-```
+```swift
 var arr = NSArray(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("arr", ofType: "plist")!)!)
         
         println(arr![0])
@@ -279,7 +279,7 @@ var arr = NSArray(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pa
 
 解析成字典
 
-```
+```swift
 
 		var dict = NSDictionary(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("dict", ofType: "plist")!)!)
         
@@ -324,7 +324,7 @@ SQLite 可以方便的在本地存储一段数据。
 
 
 
-```
+```swift
 		var context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
         
@@ -341,7 +341,7 @@ SQLite 可以方便的在本地存储一段数据。
 
 可以在 AppDelegate 中的委托 azy var persistentStoreCoordinator: NSPersistentStoreCoordinator 中 println(url) 输出数据库存放的位置，然后使用 SQLite 工具直接浏览操作数据库。
 
-```
+```swift
 
 lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
@@ -376,7 +376,7 @@ lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
 
 定义变量
 
-```
+```swift
     var dataArr:Array<AnyObject> = []
     var context:NSManagedObjectContext!
 
@@ -384,7 +384,7 @@ lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
 
 读取数据
 
-```
+```swift
 
 		context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         
@@ -397,7 +397,7 @@ lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
 渲染界面
 
 
-```
+```swift
 
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
 
@@ -420,7 +420,7 @@ lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
 
 从数据库获取指定数据
 
-```
+```swift
 
 //UsersTableViewController:
 
@@ -437,7 +437,7 @@ lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
 
 将修改后的值保存到数据库中
 
-```
+```swift
 
 //UserContentViewController.m:
 
@@ -451,7 +451,7 @@ lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
 
 ### 删除数据
 
-```
+```swift
 
 //注意与 deletedObjects 的区别
 			context.deleteObject(dataArr[indexPath.row] as! NSManagedObject)

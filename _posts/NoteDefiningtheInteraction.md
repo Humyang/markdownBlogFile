@@ -72,7 +72,7 @@ An *action* is a **piece of code** that’s **linked to an event that can occur 
 
 You define an action by creating and implementing a method with an `IBAction` return type and a `sender` parameter.
 
-```
+```objc
 - (IBAction)restoreDefaults:(id)sender;
 
 ```
@@ -89,7 +89,7 @@ The `sender` parameter points to the **object that was responsible for triggerin
 
 Outlets are defined as `IBOutlet` properties.
 
-```
+```objc
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
 ```

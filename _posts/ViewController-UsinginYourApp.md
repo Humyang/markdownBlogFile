@@ -96,7 +96,7 @@ Segue 通常由与它关联的源视图控制器对象触发，例如控件或�
 
 **清单 2-1** 编程方式触发 segue
 
-```
+```objc
 
 - (void)orientationChanged:(NSNotification *)notification
 {
@@ -138,7 +138,7 @@ Segue 通常由与它关联的源视图控制器对象触发，例如控件或�
 
 **清单 2-2** 实例化同一个故事板中的另一个视图控制器
 
-```
+```objc
 
 - (IBAction)presentSpecialViewController:(id)sender {
     UIStoryboard *storyboard = self.storyboard;
@@ -153,7 +153,7 @@ Segue 通常由与它关联的源视图控制器对象触发，例如控件或�
 
 清单 2-3 展示了另一个频繁用到的技术。这个例子加载新的故事板和实例化它的初始视图控制器。它使用这个视图控制器作为放置在拓展显示器的新窗口的根视图控制器。要显示这个方法返回的窗口，在应用程序调用窗口的 [makeKeyAndVisible](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIWindow_Class/index.html#//apple_ref/occ/instm/UIWindow/makeKeyAndVisible) 方法。
 
-```
+```objc
 
 - (UIWindow*) windowFromStoryboard: (NSString*) storyboardName
                                    onScreen: (UIScreen*) screen
@@ -210,7 +210,7 @@ segue 只连接保存在同一个故事板的场景。需要从另一个故事�
 
 **清单 2-4** 安装视图控制器作为窗口的根视图控制器
 
-```
+```objc
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

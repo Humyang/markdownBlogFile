@@ -56,7 +56,7 @@ id: "iOS-Note-View-Programming-Guide-for-iOS-Views"
 ###编程方式创建视图对象
 如果你打算以编程方式创建视图，你可以使用标准的 allocation/initialization 方式。视图的默认初始化方法是 [initWithFrame: ](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/initWithFrame:)，它为视图设置初始尺寸和相对于它的父视图 (将来的父视图) 的定位。例如，创建一个新的通用 UIView 对象，你可以使用类似下面的代码：
 
-```
+```objc
 CGRect  viewRect = CGRectMake(0, 0, 100, 100);
 UIView* myView = [[UIView alloc] initWithFrame:viewRect];
 ```
@@ -118,7 +118,7 @@ UIView 类包含标签 (tag) 属性，你可以用整型值来标记单个视图
 <br />
 **清单 3-1** 添加视图到窗口
 
-```
+```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -139,7 +139,7 @@ UIView 类包含标签 (tag) 属性，你可以用整型值来标记单个视图
 <br />
 **清单 3-2** 添加视图到已有的视图层次结构
 
-```
+```objc
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -198,7 +198,7 @@ UIView 类包含标签 (tag) 属性，你可以用整型值来标记单个视图
 
 视图的 [transform](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instp/UIView/transform) 属性包含 [CGAffineTransform](https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CGAffineTransform/index.html#//apple_ref/c/tdef/CGAffineTransform) 结构体应用转换效果。默认情况下，这个属性设置为恒等转换，不会修改视图的外观。你可以随时为这个属性分配新的转换。例如，旋转视图 45 度，你可以使用下面的代码：
 
-```
+```objc
 // M_PI/4.0 is one quarter of a half circle, or 45 degrees.
 CGAffineTransform xform = CGAffineTransformMakeRotation(M_PI/4.0);
 self.view.transform = xform;
@@ -335,7 +335,7 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 
 [layerClass](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/clm/UIView/layerClass) 方法的实现应该只是简单的创建想要的类对象并且返回它。例如，视图使用分片的方式将会使用下面的代码重写这个方法：
 
-```
+```objc
 + (Class)layerClass
 {
     return [CATiledLayer class];
@@ -354,7 +354,7 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 
 **清单 3-3** 添加自定义层到视图
 
-```
+```objc
 - (void)viewDidLoad {
     [super viewDidLoad];
  
@@ -428,7 +428,7 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 <br />
 **清单 3-4** 初始化视图子类
 
-```
+```objc
  (id)initWithFrame:(CGRect)aRect {
     self = [super initWithFrame:aRect];
     if (self) {
@@ -458,7 +458,7 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 
 **清单 3-5** 绘制方法
 
-```
+```objc
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -506,7 +506,7 @@ convert...:fromView: 方法从一些其他视图的坐标系统转换到当前�
 
 清单 3-6 实现 dealloc 方法
 
-```
+```objc
 
 - (void)dealloc {
     // Release a retained UIColor object

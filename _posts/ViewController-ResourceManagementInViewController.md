@@ -81,7 +81,7 @@ iOS 视图控制器编程指南：视图控制器的资源管理
 
 **清单 4-1** 自定义视图控制器的类声明
 
-```
+```objc
 
 @interface MyViewController()
 @property (nonatomic) IBOutlet id myButton;
@@ -126,7 +126,7 @@ b.使用 [addSubview:](https://developer.apple.com/library/ios/documentation/UIK
 
 **清单 4-2** 以编程方式创建视图
 
-```
+```objc
 
 - (void)loadView
 {
@@ -169,7 +169,7 @@ b.使用 [addSubview:](https://developer.apple.com/library/ios/documentation/UIK
 
 **清单 4-3** 释放视图控制器的视图不在屏幕上显示
 
-```
+```objc
 
 - (void)didReceiveMemoryWarning
 {

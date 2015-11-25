@@ -55,7 +55,7 @@ id: "iOS-Note-View-Programming-Guide-for-iOS-Windows"
 ###使用编程方式创建窗口
 如果你准备使用编程方式创建的应用程序主窗口，你应该在应用程序的委托方法 [application:didFinishLaunchingWithOptions:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIApplicationDelegate_Protocol/index.html#//apple_ref/occ/intfm/UIApplicationDelegate/application:didFinishLaunchingWithOptions:) 中包含类似以下的代码到：
 
-```
+```objc
 
 self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 
@@ -68,7 +68,7 @@ self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] a
 ###添加内容到窗口
  每一个窗口通常有一个单独根视图对象 (被相应的视图控制器管理) 它包含其他所有视图呈现你的内容。使用单独的根视图简化变更界面的处理；需要显示新内容，你只需要替换根视图。要在安装新视图到窗口，使用 [addSubview:](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIView_Class/index.html#//apple_ref/occ/instm/UIView/addSubview:) 方法。例如，安装一个通过视图控制器管理的视图，你可以使用类似下面的代码：
  
-```
+```objc
 [window addSubview:viewController.view];
 ```
 
@@ -123,7 +123,7 @@ UIWindowDidBecomeKeyNotification 和 UIWindowDidResignKeyNotification 通知帮�
  
 **清单 2-1** 为屏幕连接通知和断开连接通知注册
 
-```
+```objc
 - (void)setupScreenConnectionNotificationHandlers
 {
     NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
@@ -141,7 +141,7 @@ UIWindowDidBecomeKeyNotification 和 UIWindowDidResignKeyNotification 通知帮�
 <br />
 ** 清单 2-2** 处理连接和断开连接通知
 
-```
+```objc
 - (void)handleScreenConnectNotification:(NSNotification*)aNotification
 {
     UIScreen*    newScreen = [aNotification object];
@@ -180,7 +180,7 @@ UIWindowDidBecomeKeyNotification 和 UIWindowDidResignKeyNotification 通知帮�
 <br />
 ** 清单 2-3** 为拓展显示器配置窗口
 
-```
+```objc
 - (void)checkForExistingScreenAndInitializeIfPresent
 {
     if ([[UIScreen screens] count] > 1)

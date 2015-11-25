@@ -409,8 +409,8 @@ Swift 中需要使用 dynamic，这里是 [dynamic](https://developer.apple.com/
 
 
 	//1. 需要添加 dynamic 标识，否则会编译会出错。
- 	 dynamic private var coverImage:UIImageView!
-    private var myContext = 0
+	dynamic private var coverImage:UIImageView!
+	private var myContext = 0
 
 	init(frame: CGRect,ablumCover:String) {
 		

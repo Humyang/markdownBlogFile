@@ -43,7 +43,7 @@ iOS 视图控制器编程指南：从视图控制器的角度看无障碍访问
 
 **清单 9-1** 投递一个无障碍访问通知更改第一个念出的元素
 
-```
+```objc
 
 @implementation MyViewController
 - (void)viewDidAppear:(BOOL)animated
@@ -109,7 +109,7 @@ Magic Tap 的目的是快速执行一些常用的或最有意义的动作。例�
 
 **清单 9-2**注册成为无障碍访问通知观测者。
 
-```
+```objc
 
 @implementation MyViewController
 - (void)viewDidLoad
